@@ -62,11 +62,16 @@ class App extends Component {
    {/*Bhavuk's Code*/}
   <Router>
     <Route exact path='/' component={StartingComponent}/>
+    <Route path='/go' component={temporary}/>
   </Router>
    </div>
     </div>
   );
 }
+}
+
+function temporary(){
+  return <h1>It works</h1>
 }
 
 export default App;
