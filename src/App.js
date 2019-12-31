@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import {BrowserRouter as Router,Switch,Route,Link} from "react-router-dom";
 import logo from './logo.svg';
 import './App.css';
+import StartingComponent from './Components/StartingComponents'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './Components/Navbar.js';
 import SideDrawer from './Components/SideDrawer/SideDrawer'
@@ -56,6 +58,11 @@ class App extends Component {
    <Navbar drawerClickHandler ={this.drawerToggleHandler}/>
    <SideDrawer show={this.state.sideDrawerOpen}/>
    {Back}   
+
+   {/*Bhavuk's Code*/}
+  <Router>
+    <Route exact path='/' component={StartingComponent}/>
+  </Router>
    </div>
     </div>
   );

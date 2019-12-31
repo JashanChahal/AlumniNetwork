@@ -5,6 +5,7 @@ const sideDrawer = props => {
     if(props.show){
         drawerClasses = 'side-drawer open'
     }
+    
     return (
     <nav className={drawerClasses}>
         <span className="navbar-brand"><strong>Alumni Network</strong></span>
