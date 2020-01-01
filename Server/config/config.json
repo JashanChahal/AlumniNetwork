@@ -1,0 +1,14 @@
+{
+
+    "test":{
+      "PORT":3000,
+      "MONGODB_URI":"mongodb://localhost:27017/AluminiTest",
+      "JWT_SECRET":"bcaksbb2i372hudiw39"
+    },
+    "development":{
+      "PORT":3000,
+      "MONGODB_URI":"mongodb://localhost:27017/Alumini",
+      "JWT_SECRET":"bciawu82732973hweob"
+    }
+
+}
