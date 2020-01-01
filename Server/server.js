@@ -14,11 +14,15 @@ mongoose.connect("mongodb://localhost:27017/Alumini");
 const app = express();
 app.use(bodyParser.json());
 app.set('view engine','hbs');
-app.use(express.static(__dirname + '/views'));
+// app.use(express.static(__dirname + '\views'));
+app.use('/static', express.static(path.join(__dirname, 'views')))
+
 
 
 app.get('/',(req,res) => {
   res.render('index.hbs');
+  console.log(__dirname);
+
 });
 
 app.post('/add',(req,res) => {
