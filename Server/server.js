@@ -17,8 +17,6 @@ app.use(bodyParser.json());
 app.set('view engine','hbs');
 app.use('/static', express.static(path.join(__dirname, 'views')));
 
-
-
 app.get('/',(req,res) => {
   res.render('index.hbs');
 });
