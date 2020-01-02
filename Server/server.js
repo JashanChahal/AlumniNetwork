@@ -10,18 +10,29 @@ const path = require('path');
 const {user} = require('./models/user');
 
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost:27017/Alumini");
-
+mongoose.connect("mongodb://localhost:27017/Alumini")
+mongoose.connection.on('connected',()=>{
+    console.log('connected');
+})
 const app = express();
 app.use(bodyParser.json());
+app.use((req,res,next)=>{
+    res.setHeader('Access-Control-Allow-Origin','*');
+    res.setHeader('Access-Control-Allow-Methods','*');
+    res.setHeader('Access-Control-Allow-Headers','*')
+    next();
+})
 app.set('view engine','hbs');
 app.use('/static', express.static(path.join(__dirname, 'views')));
 
 app.get('/',(req,res) => {
-  res.render('index.hbs');
+  res.render('../../views/index.hbs');
 });
 
+//hsdbvjh
+
 app.post('/add',(req,res) => {
+    console.log(req);
    var body = _.pick(req.body,['userName','password']);
    var newUser = new user(body);
 
