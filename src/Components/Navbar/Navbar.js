@@ -7,7 +7,7 @@ class Navbar extends Component {
     render() {
         return (
             <div>
-            <nav className="navbar navbar-expand-lg navbar-light" style={{backgroundColor:"#0C6396"}}>
+            <nav className="navbar navbar-expand-lg navbar-light" style={{backgroundColor:"rgba(12, 99, 150)"}}>
             <DrawerToggleButton click={this.props.drawerClickHandler}></DrawerToggleButton>
                 <a className ="navbar-brand text-white" href="#"><FontAwesomeIcon icon={faAcquisitionsIncorporated} size="lg"></FontAwesomeIcon><strong> Alumni Network</strong></a>
                 
