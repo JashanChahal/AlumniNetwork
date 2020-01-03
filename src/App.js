@@ -1,77 +1,28 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router,Switch,Route,Link} from "react-router-dom";
-import logo from './logo.svg';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import './App.css';
-import StartingComponent from './Components/StartingComponents'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from './Components/Navbar.js';
-import SideDrawer from './Components/SideDrawer/SideDrawer'
-import Backdrop from './Components/Backdrop/Backdrop'
-
-
+import Navbarhandler from './Components/Navbar/Navbarhandler';
+import Register from './Components/Auth/Register';
+import Login from './Components/Auth/Login';
+import StartingComponent from './Components/Dashboard/StartingComponent';
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-      greeting: ''
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
 
-  handleChange(event) {
-    this.setState({ name: event.target.value });
-  }
+  render() {
+    return (
+      <div className="App">
+        <div style={{ height: '100%' }}>
 
-  handleSubmit(event) {
-    event.preventDefault();
-    fetch(`/api/greeting?name=${encodeURIComponent(this.state.name)}`)
-      .then(response => response.json())
-      .then(state => this.setState(state));
+          <Router>
+            <Navbarhandler /> 
+            <Route exact path='/' component={StartingComponent} />
+            <Route path='/login' component={Login} />
+            <Route path='/register' component={Register} />
+          </Router>
+        </div>
+      </div>
+    );
   }
-
-  state = {
-    sideDrawerOpen : false
-  }
-  drawerToggleHandler = () =>{
-    this.setState((prevState)=>{
-      return{
-        sideDrawerOpen : !prevState.sideDrawerOpen
-      }
-    })
-
-  }
-  backDropClickHandler=()=>{
-    this.setState({sideDrawerOpen :false})
-  }
-  
-  
-  render(){
-    let Back;
-    if(this.state.sideDrawerOpen){
-      Back = <Backdrop backdrophandler ={this.backDropClickHandler}/>
-    }
-  return (
-    <div className="App">
-      <div style={{height : '100%'}}>
-   <Navbar drawerClickHandler ={this.drawerToggleHandler}/>
-   <SideDrawer show={this.state.sideDrawerOpen}/>
-   {Back}   
-
-   {/*Bhavuk's Code*/}
-  <Router>
-    <Route exact path='/' component={StartingComponent}/>
-    <Route path='/go' component={temporary}/>
-  </Router>
-   </div>
-    </div>
-  );
-}
-}
-
-function temporary(){
-  return <h1>It works</h1>
 }
 
 export default App;

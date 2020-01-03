@@ -1,6 +1,6 @@
 import React,{Fragment} from 'react'
 import {Link} from 'react-router-dom'
-export default function StartingComponent(){
+export default function Login(){
     return (
         <div className="container" >
             <div className="row  justify-content-md-around flex-md-row flex-column mt-5">
