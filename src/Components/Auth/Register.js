@@ -201,7 +201,7 @@ class Register extends Component {
                         </div>
                         <div className="createAccount">
                             <button type="submit">Create Account</button>
-
+                            <small>Already Have Account?  <Link to="/login">Sign Up</Link></small>
                         </div>
                     </form>
                 </div>
