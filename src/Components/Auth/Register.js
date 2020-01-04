@@ -135,37 +135,59 @@ class Register extends Component {
                         <div className="MotherName">
                             <label for="MotherName">Mother Name</label>
                             <input type="text" name="MotherName" id="MotherName" className={formErrors.MotherName.length > 0 ? "error" : null} value={MotherName} onChange={this.changeHandler} noValidate />
+                            {(formErrors.MotherName.length > 0) && (
+                                <span className="errorMessage">{formErrors.MotherName}</span>
+                            )}
                         </div>
+
 
                         <div className="FatherName">
                             <label for="FatherName">Father Name</label>
                             <input type="text" name="FatherName" id="FatherName" className={formErrors.FatherName.length > 0 ? "error" : null} value={FatherName} onChange={this.changeHandler} />
+                            {(formErrors.FatherName.length > 0) && (
+                                <span className="errorMessage">{formErrors.FatherName}</span>
+                            )}
                         </div>
 
 
                         <div className='Email'>
                             <label for="Email">Email</label>
                             <input type="text" name="Email" id="Email" className={formErrors.Email.length > 0 ? "error" : null} value={Email} onChange={this.changeHandler} />
+                            {(formErrors.Email.length > 0) && (
+                                <span className="errorMessage">{formErrors.Email}</span>
+                            )}
                         </div>
 
                         <div className="Password">
                             <label for="Password">Password</label>
                             <input type="password" name="Password" id="Password" className={formErrors.Password.length > 0 ? "error" : null} value={Password} onChange={this.changeHandler} />
+                            {(formErrors.Password.length > 0) && (
+                                <span className="errorMessage">{formErrors.Password}</span>
+                            )}
                         </div>
 
                         <div className='Year'>
                             <label for="Year">Year</label>
                             <input type="year" name="Year" id="Year" className={formErrors.Year.length > 0 ? "error" : null} value={Year} onChange={this.changeHandler} />
+                            {(formErrors.Year.length > 0) && (
+                                <span className="errorMessage">{formErrors.Year}</span>
+                            )}
                         </div>
 
                         <div className="Subject">
                             <label for="Subject">Subject</label>
                             <input type="text" name="Subject" id="Subject" className={formErrors.Subject.length > 0 ? "error" : null} value={Subject} onChange={this.changeHandler} />
+                            {(formErrors.Subject.length > 0) && (
+                                <span className="errorMessage">{formErrors.Subject}</span>
+                            )}
                         </div>
 
                         <div className="Cgpa">
                             <label for="Cgpa">Cgpa</label>
                             <input type="text" name="Cgpa" id="Cgpa" className={formErrors.Cgpa.length > 0 ? "error" : null} value={Cgpa} onChange={this.changeHandler} />
+                            {(formErrors.Cgpa.length > 0) && (
+                                <span className="errorMessage">{formErrors.Cgpa}</span>
+                            )}
                         </div>
 
                         <div className="WorkExperience">
