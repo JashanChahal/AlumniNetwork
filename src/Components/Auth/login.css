@@ -1,0 +1,38 @@
+.grouper
+{
+    background-color: white;
+    max-width: 30%;
+    margin-top: 10%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px black;
+}
+
+
+@media only screen and (max-width: 1028px) 
+{
+    .grouper
+        {
+            background-color: white;
+            max-width: 50%;
+            margin-top: 10%;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px black;
+        }
+
+}
+
+@media only screen and (max-width: 600px)
+{
+    .grouper
+        {
+            background-color: white;
+            max-width: 90%;
+            margin-top: 10%;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px black;
+        }
+
+}

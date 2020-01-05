@@ -72,7 +72,7 @@ class Register extends Component {
                 if (numUpper == 0 || numUpper == value.length)
                     val = false;
                 if (val == false)
-                    formErrors.Password = "Password should be combination of uppercase and lowercase letters";
+                    formErrors.Password = "Password should be combination of uppercase and lowercase letters with minimum 6 letters";
                 else
                     formErrors.Password = ""
                 break;
@@ -204,7 +204,7 @@ class Register extends Component {
                         </div>
                         <div className="createAccount">
                             <button type="submit">Create Account</button>
-                            <small>Already Have Account?  <Link to="/login">Sign Up</Link></small>
+                            <small>Already Have Account?  <Link to="/login">Sign In</Link></small>
                         </div>
                     </form>
                 </div>
