@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbarhandler from './Components/Navbar/Navbarhandler';
 import Register from './Components/Auth/Register';
-import Login from './Components/Auth/Login';
+import LoginType from './Components/Auth/LoginType';
+import Login from './Components/Auth/Login'
 import StartingComponent from './Components/Dashboard/StartingComponent';
 class App extends Component {
 
@@ -15,7 +15,8 @@ class App extends Component {
           <Router>
             <Navbarhandler />
             <Route exact path='/' component={StartingComponent} />
-            <Route path='/login' component={Login} />
+            <Route exact path='/login' component={LoginType}/>
+            <Route exact path='/login/:type' component={Login} />
             <Route path='/register' component={Register} />
           
           </Router>

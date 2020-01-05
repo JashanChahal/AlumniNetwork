@@ -28,7 +28,7 @@ light green: #A3C4BC
   }
   
   .form-wrapper {
-    width: 600px;
+    width: 400px;
     display: flex;
     flex-direction: column;
     padding: 20px 40px;
@@ -82,9 +82,10 @@ light green: #A3C4BC
     font-size: 0.75em;
     display: relative;
   }
-  
+    
   .Name {
-    margin-right: 1%;
+    /* margin-right: 1%; */
+    width: 100%
   }
   .MotherName{
       margin-right: 1%;

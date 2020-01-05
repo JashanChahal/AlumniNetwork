@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import "./register.css";
+import axios from 'axios'
 class Register extends Component {
     constructor(props) {
         super(props)
@@ -17,12 +18,13 @@ class Register extends Component {
             Cgpa: null,
             College: null,
             WorkExperience: null,
-            type: 'Alumini',
+            Type: 'Alumini',
         }
     }
     submitHandler = (e) => {
         e.preventDefault()
         console.log(this.state)
+        // axios.post('http://localhost:8080/register',this.state);
     }
     changeHandler = (e) => {
         this.setState({ [e.target.name]: e.target.value })
