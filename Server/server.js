@@ -10,7 +10,7 @@ const path = require('path');
 const {user} = require('./models/user');
 
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost:27017/Alumini")
+mongoose.connect("mongodb://localhost:27017/Alumini");
 mongoose.connection.on('connected',()=>{
     console.log('connected');
 })

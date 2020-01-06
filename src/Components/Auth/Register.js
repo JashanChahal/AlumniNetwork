@@ -5,6 +5,8 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import "./register.css";
 import axios from 'axios'
 
+
+
 const emailRegex = RegExp(
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
