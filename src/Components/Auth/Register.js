@@ -31,7 +31,7 @@ class Register extends Component {
             Cgpa: '',
             College: '',
             WorkExperience: '',
-            type: 'Alumini',
+            Type: 'Alumini',
             formErrors: {
                 Name: '',
                 Password: '',
@@ -48,7 +48,9 @@ class Register extends Component {
     submitHandler = (e) => {
         e.preventDefault()
         if (formValid(this.state.formErrors)) {
-            console.log(this.state)
+            var obj = this.state;
+            delete obj.formErrors;
+            axios.post('http://1e7f0bd2.ngrok.io/register',obj);
         }
     }
     changeHandler = (e) => {
