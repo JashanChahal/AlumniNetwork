@@ -5,23 +5,25 @@ import Navbarhandler from './Components/Navbar/Navbarhandler';
 import Register from './Components/Auth/Register';
 import LoginType from './Components/Auth/LoginType';
 import Login from './Components/Auth/Login'
-import StartingComponent from './Components/Dashboard/StartingComponent';
+import StartingComponent from './Components/Dashboard/Dashboard';
+import {AuthProvider} from './Context/AuthContext.js';
+import Dashboard from './Components/Dashboard/Dashboard';
 class App extends Component {
 
   render() {
     return (
-        <Fragment>
+      <AuthProvider>
         <div className="App" style={{ height: '100%' }}>
           <Router>
             <Navbarhandler />
-            <Route exact path='/' component={StartingComponent} />
-            <Route exact path='/login' component={LoginType}/>
+            <Route exact path='/' component={Dashboard} />
+            <Route exact path='/login' component={LoginType} />
             <Route exact path='/login/:type' component={Login} />
             <Route path='/register' component={Register} />
-          
           </Router>
         </div>
-      </Fragment>
+      </AuthProvider>
+
     );
   }
 }

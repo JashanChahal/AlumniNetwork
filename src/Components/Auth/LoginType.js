@@ -1,6 +1,16 @@
-import React from 'react'
+import React,{useContext } from 'react'
 import {Link} from 'react-router-dom'
+import { AuthContext } from '../../Context/AuthContext'
+
 export default function Login(){
+    
+    var [authContext, setAuthContext] = useContext(AuthContext);
+    if (authContext.LoggedIn) {
+        return (
+            <div>Already LoggedIn</div>
+        )
+    }
+    
     return (
         <div className="container" >
             <div className="row  justify-content-md-around flex-md-row flex-column mt-5">
