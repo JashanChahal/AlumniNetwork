@@ -35,7 +35,7 @@ class PostForm extends Component {
                         <h1>Create Post</h1>
                         <form>
                             <textarea className="form-control" name="Text" rows="5" placeholder="Enter Text Here.. " value={this.state.Text} onChange={this.changeHandler}></textarea>
-                            <input type = 'file'/>
+                            <input type = 'file' className="form-control my-2"/>
                             <button className="btn btn-primary">Post</button>
                         </form>
                     </div>
