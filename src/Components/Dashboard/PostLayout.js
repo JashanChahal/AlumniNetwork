@@ -1,14 +1,30 @@
-import React from 'react'
+import React,{useState} from 'react'
 
-export default function Post(){
-    return (<React.Fragment >
-        <div class="card" >
-  <img src="..." class="card-img-top" alt="..."/>
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
-    </React.Fragment>)
+export default function Post(props){
+    
+    const [postLocal,setPostLocal]=useState(
+      { likes: 0,
+        id: props.id,
+        title: props.title,
+        body: props.body
+      }
+   )
+
+   function setLikes(){
+     setPostLocal({...postLocal,likes:postLocal.likes+1})
+   }
+    
+    return (
+    < >
+    
+       <div class="card my-4" >
+       <div class="card-body">
+          <h5 class="card-title">{postLocal.title}</h5>
+          <p class="card-text">{postLocal.body}</p>
+          <a href="dsf" class="btn btn-primary">Go somewhere</a>
+          <p>Likes: {postLocal.likes}</p>
+          <button onClick={setLikes}>Like</button>
+        </div>
+      </div> 
+    </>)
 }
