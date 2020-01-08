@@ -2,6 +2,7 @@ import React, { Component, useContext, useState } from 'react'
 import Backdrop from '../Navbar/Backdrop/Backdrop.js'
 import './PostForm.css'
 import { PostContext } from '../../Context/PostContext.js';
+import axios from 'axios'
 const PostForm = (props) => {
 
     const [PostState, setPostState] = useState(
@@ -30,23 +31,31 @@ const PostForm = (props) => {
     }
     const SubmitHandler = (e) => {
         e.preventDefault()
-        console.log(PostState)
+        
+        const obj = new FormData()
+        obj.append('postImage',PostState.Image,PostState.Image.name)
+        obj.append('Author',PostState.Author)
+        obj.append('Text',PostState.Text)
+        console.log(obj)
+        axios.post('http://63713223.ngrok.io/posts/create_post',obj);
 
     }
     let wrapper = "postform-wrapper";
+    let postwrapper = "postwrapper";
     let Back
     const [On, setOn] = useContext(PostContext)
     const backDropHandler = (e) => {
         setOn(!On)
     }
     if (On) {
+        postwrapper = "postwrapper open"
         wrapper = "postform-wrapper open"
         Back = <Backdrop backdrophandler={backDropHandler} />
     }
     return (
         <React.Fragment>
 
-            <div className="postwrapper">
+            <div className={postwrapper}>
                 <div className={wrapper} >
                     <h1>Create Post</h1>
                     <form onSubmit={SubmitHandler}>
