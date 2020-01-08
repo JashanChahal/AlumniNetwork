@@ -1,11 +1,13 @@
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import PostForm from './PostForm.js'
 import PostLayout from './PostLayout'
 import './Dashboard.css'
+import { PostContext } from '../../Context/PostContext.js';
+
 export default function Dashboard() {
-    const [On,setOn] =useState(false)
+    const [On,setOn] = useContext(PostContext)
     var myStyle={
         padding: '20px',
         border: '1px solid grey'
@@ -49,7 +51,7 @@ export default function Dashboard() {
                         <div style={myStyle}>
                             <FontAwesomeIcon icon={faEdit} size="lg" style={{padding: '5px'}}></FontAwesomeIcon>
                             <button className="postButton" type="submit" onClick={()=> setOn(!On)} >Write something Here</button>
-                            <PostForm status={On}/>
+                            <PostForm />
                          </div> 
 
                     <PostLayout />

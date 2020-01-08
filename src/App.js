@@ -8,11 +8,13 @@ import Login from './Components/Auth/Login'
 import StartingComponent from './Components/Dashboard/Dashboard';
 import {AuthProvider} from './Context/AuthContext.js';
 import Dashboard from './Components/Dashboard/Dashboard';
+import { PostProvider } from './Context/PostContext';
 class App extends Component {
 
   render() {
     return (
       <AuthProvider>
+        <PostProvider>
         <div className="App" style={{ height: '100%' }}>
           <Router>
             <Navbarhandler />
@@ -22,6 +24,7 @@ class App extends Component {
             <Route path='/register' component={Register} />
           </Router>
         </div>
+        </PostProvider>
       </AuthProvider>
 
     );

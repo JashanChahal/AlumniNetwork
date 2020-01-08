@@ -24,16 +24,16 @@
     display: flex;
     flex-direction: column;
     padding: 20px 40px;
-    border-radius: 10px;
+    border-radius: 25px;
     box-shadow: 0px 0px 18px #555;
     background-color: #ffffff;
     z-index: 300;
       transform: translateY(-200%);
-    transition: transform 0.3s ease;
+    transition: transform 0.4s ease;
     /* margin-top: -1500px; */
   }
   .postform-wrapper.open{
     transform: translateY(0);
-    transition: transform 0.3 ease;
+    transition: transform 0.4s ease;
     margin-top: 0px;
   }
