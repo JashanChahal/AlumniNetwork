@@ -12,8 +12,11 @@
     padding-top : 30px;
     padding-left: 20%;
     padding-right: 20%;
+  
+ 
+  }
+  .postwrapper.open{
     z-index: 300;
-    
   }
   
   .postform-wrapper {
