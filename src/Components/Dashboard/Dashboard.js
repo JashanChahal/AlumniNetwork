@@ -7,13 +7,13 @@ import './Dashboard.css'
 import axios from 'axios'
 import { PostContext } from '../../Context/PostContext.js';
 import io from 'socket.io-client';
-import axios from 'axios';
 
-var socket = io('http://localhost:8080', { transport: ['websocket'] });
 
-socket.on('notification', (res) => {
-    console.log(res);
-})
+// var socket = io('http://localhost:8080', { transport: ['websocket'] });
+
+// socket.on('notification', (res) => {
+//     console.log(res);
+// })
 
 export default function Dashboard() {
     const [data,updateData]=useState({})

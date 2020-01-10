@@ -12,12 +12,12 @@ import io from 'socket.io-client';
 const emailRegex = RegExp(
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
-var socket = io('http://localhost:8080', { transport: ['websocket'] });
+// var socket = io('http://10.42.0.97:8080', { transport: ['websocket'] });
 
-socket.on('notification', (res) => {
+// socket.on('notification', (res) => {
     
-    console.log(res);
-})
+//     console.log(res);
+// })
 
 const formValid = state => {
     let valid = true;
@@ -65,7 +65,9 @@ class Register extends Component {
         if (formValid(this.state)) {
             var obj = this.state;
             delete obj.formErrors;
-            axios.post('http://192.168.137.191:8080/register',obj)
+            axios.post('http://10.42.0.97:8080/register',obj)
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
             this.props.history.push("/")           
         }
     }
