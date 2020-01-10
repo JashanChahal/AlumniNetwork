@@ -4,12 +4,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import "./register.css";
 import axios from 'axios'
-
-
+import { isObject } from 'util';
+// import {io} from 'socket.io';
+import { Socket } from 'dgram';
+import io from 'socket.io-client';
 
 const emailRegex = RegExp(
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
+var socket = io('http://localhost:8080', { transport: ['websocket'] });
+
+socket.on('notification', (res) => {
+    
+    console.log(res);
+})
 
 const formValid = formErrors => {
     let valid = true;
@@ -52,7 +60,16 @@ class Register extends Component {
         if (formValid(this.state.formErrors)) {
             var obj = this.state;
             delete obj.formErrors;
-            axios.post('http://1e7f0bd2.ngrok.io/register',obj);
+            axios.post('http://10.42.0.97:8080/register',obj).then(() => {
+            var socket = io('http://10.42.0.97:8080/');    
+            // var io = Socket();
+                socket.on("colllegeNotf",(res) => {
+                    console.log(res);
+                });
+            }).catch((e) => {
+                console.log(e);
+            });
+            
         }
     }
     changeHandler = (e) => {
