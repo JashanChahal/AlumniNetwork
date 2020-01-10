@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import "./register.css";
@@ -11,12 +11,17 @@ const emailRegex = RegExp(
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
 
-const formValid = formErrors => {
+const formValid = state => {
     let valid = true;
-    Object.values(formErrors).forEach(val => {
-        val.length > 0 && (valid = false)
-    }
-    );
+    console.log("validity : "+state)
+    Object.values(state).forEach(item=>{
+        if(typeof item === 'object')
+            Object.values(item).forEach(error=>  { error.length > 0 && (valid = false); })
+        else
+            (item.length === 0) &&(valid=false); 
+        
+    })
+    
     return valid;
 }
 class Register extends Component {
@@ -49,10 +54,11 @@ class Register extends Component {
     }
     submitHandler = (e) => {
         e.preventDefault()
-        if (formValid(this.state.formErrors)) {
+        if (formValid(this.state)) {
             var obj = this.state;
             delete obj.formErrors;
-            axios.post('http://1e7f0bd2.ngrok.io/register',obj);
+            axios.post('http://192.168.137.191:8080/register',obj)
+            this.props.history.push("/")           
         }
     }
     changeHandler = (e) => {
