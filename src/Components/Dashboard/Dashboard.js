@@ -9,11 +9,11 @@ import { PostContext } from '../../Context/PostContext.js';
 import io from 'socket.io-client';
 
 
-// var socket = io('http://localhost:8080', { transport: ['websocket'] });
+var socket = io('http://localhost:8080', { transport: ['websocket'] });
 
-// socket.on('notification', (res) => {
-//     console.log(res);
-// })
+socket.on('notification', (res) => {
+    console.log(res);
+})
 
 export default function Dashboard() {
     const [data,updateData]=useState({})
