@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component,useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import {CircularProgress} from '@material-ui/core';
 import "./register.css";
 import axios from 'axios'
 
@@ -24,10 +23,11 @@ const formValid = state => {
     
     return valid;
 }
-class Register extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
+export default function Register(props) {
+
+    const [loading, setLoading] = useState(false)
+    const [errorMessage,setErrorMessage]=useState(false)
+    const [state,setState]=useState({
             Name: '',
             Password: '',
             FatherName: '',
@@ -47,24 +47,31 @@ class Register extends Component {
                 Email: '',
                 Year: '',
                 Subject: '',
-                Cgpa: ''
-
-            }
-        }
-    }
-    submitHandler = (e) => {
+                Cgpa: ''      } })
+      
+    function submitHandler(e){
         e.preventDefault()
-        if (formValid(this.state)) {
-            var obj = this.state;
+        if (formValid(state)) {
+            setLoading(true)
+            var obj = JSON.parse(JSON.stringify(state));
+            console.log(state)
             delete obj.formErrors;
             axios.post('http://192.168.137.191:8080/register',obj)
-            this.props.history.push("/")           
+            .then(res => {
+                console.log(res)
+                setLoading(false)
+              props.history.push("/")    
+             })
+            .catch(err => {
+                setLoading(false)
+                setErrorMessage(true);
+                })       
         }
     }
-    changeHandler = (e) => {
+    function changeHandler(e){
         e.preventDefault();
         const { name, value } = e.target;
-        let formErrors = this.state.formErrors;
+        let formErrors = state.formErrors;
         switch (name) {
             case "Name":
 
@@ -125,29 +132,29 @@ class Register extends Component {
 
 
         }
-
-        this.setState({ formErrors, [name]: e.target.value })
+        setState({ ...state, formErrors:{...state.formErrors,formErrors}, [name]: e.target.value })
     }
-    render() {
-        const { Name, Password, formErrors, FatherName, MotherName, Email, Year, Subject, Cgpa, College, WorkExperience } = this.state
+        var { Name, Password, FatherName, MotherName, Email, Year, Subject, Cgpa, College, WorkExperience,Type,formErrors } = state
+        console.log(formErrors)
         return (
-            <div className="wrapper">
+            <div style={{pointerEvents: loading?'none':'auto'}} className="wrapper">
                 <div className="form-wrapper">
                     <h1>Create Account</h1>
                     {/* <p className="lead"><FontAwesomeIcon icon={faUser} /> Create Your Account</p> */}
-                    <form onSubmit={this.submitHandler} noValidate>
-
+                    <form onSubmit={submitHandler} noValidate>
+                    {errorMessage && <div className="alert alert-danger col">Please check your Internet Connection</div>}
+           
                         <div className="Name">
-                            <label for="Name">Name</label>
-                            <input type="text" name="Name" id="Name" className={formErrors.Name.length > 0 ? "error" : null} value={Name} onChange={this.changeHandler} noValidate />
+                            <label htmlFor="Name">Name</label>
+                            <input type="text" name="Name" id="Name" className={formErrors.Name.length > 0 ? "error" : null} value={Name} onChange={changeHandler} noValidate />
                             {(formErrors.Name.length > 0) && (
                                 <span className="errorMessage">{formErrors.Name}</span>
                             )}
                         </div>
 
                         <div className="MotherName">
-                            <label for="MotherName">Mother Name</label>
-                            <input type="text" name="MotherName" id="MotherName" className={formErrors.MotherName.length > 0 ? "error" : null} value={MotherName} onChange={this.changeHandler} noValidate />
+                            <label htmlFor="MotherName">Mother Name</label>
+                            <input type="text" name="MotherName" id="MotherName" className={formErrors.MotherName.length > 0 ? "error" : null} value={MotherName} onChange={changeHandler} noValidate />
                             {(formErrors.MotherName.length > 0) && (
                                 <span className="errorMessage">{formErrors.MotherName}</span>
                             )}
@@ -155,8 +162,8 @@ class Register extends Component {
 
 
                         <div className="FatherName">
-                            <label for="FatherName">Father Name</label>
-                            <input type="text" name="FatherName" id="FatherName" className={formErrors.FatherName.length > 0 ? "error" : null} value={FatherName} onChange={this.changeHandler} />
+                            <label htmlFor="FatherName">Father Name</label>
+                            <input type="text" name="FatherName" id="FatherName" className={formErrors.FatherName.length > 0 ? "error" : null} value={FatherName} onChange={changeHandler} />
                             {(formErrors.FatherName.length > 0) && (
                                 <span className="errorMessage">{formErrors.FatherName}</span>
                             )}
@@ -164,63 +171,63 @@ class Register extends Component {
 
 
                         <div className='Email'>
-                            <label for="Email">Email</label>
-                            <input type="text" name="Email" id="Email" className={formErrors.Email.length > 0 ? "error" : null} value={Email} onChange={this.changeHandler} />
+                            <label htmlFor="Email">Email</label>
+                            <input type="text" name="Email" id="Email" className={formErrors.Email.length > 0 ? "error" : null} value={Email} onChange={changeHandler} />
                             {(formErrors.Email.length > 0) && (
                                 <span className="errorMessage">{formErrors.Email}</span>
                             )}
                         </div>
 
                         <div className="Password">
-                            <label for="Password">Password</label>
-                            <input type="password" name="Password" id="Password" className={formErrors.Password.length > 0 ? "error" : null} value={Password} onChange={this.changeHandler} />
+                            <label htmlFor="Password">Password</label>
+                            <input type="password" name="Password" id="Password" className={formErrors.Password.length > 0 ? "error" : null} value={Password} onChange={changeHandler} />
                             {(formErrors.Password.length > 0) && (
                                 <span className="errorMessage">{formErrors.Password}</span>
                             )}
                         </div>
 
                         <div className='Year'>
-                            <label for="Year">Year</label>
-                            <input type="year" name="Year" id="Year" className={formErrors.Year.length > 0 ? "error" : null} value={Year} onChange={this.changeHandler} />
+                            <label htmlFor="Year">Year</label>
+                            <input type="year" name="Year" id="Year" className={formErrors.Year.length > 0 ? "error" : null} value={Year} onChange={changeHandler} />
                             {(formErrors.Year.length > 0) && (
                                 <span className="errorMessage">{formErrors.Year}</span>
                             )}
                         </div>
 
                         <div className="Subject">
-                            <label for="Subject">Subject</label>
-                            <input type="text" name="Subject" id="Subject" className={formErrors.Subject.length > 0 ? "error" : null} value={Subject} onChange={this.changeHandler} />
+                            <label htmlFor="Subject">Subject</label>
+                            <input type="text" name="Subject" id="Subject" className={formErrors.Subject.length > 0 ? "error" : null} value={Subject} onChange={changeHandler} />
                             {(formErrors.Subject.length > 0) && (
                                 <span className="errorMessage">{formErrors.Subject}</span>
                             )}
                         </div>
 
                         <div className="Cgpa">
-                            <label for="Cgpa">Cgpa</label>
-                            <input type="text" name="Cgpa" id="Cgpa" className={formErrors.Cgpa.length > 0 ? "error" : null} value={Cgpa} onChange={this.changeHandler} />
+                            <label htmlFor="Cgpa">Cgpa</label>
+                            <input type="text" name="Cgpa" id="Cgpa" className={formErrors.Cgpa.length > 0 ? "error" : null} value={Cgpa} onChange={changeHandler} />
                             {(formErrors.Cgpa.length > 0) && (
                                 <span className="errorMessage">{formErrors.Cgpa}</span>
                             )}
                         </div>
 
                         <div className="WorkExperience">
-                            <label for="WorkExperience">Work Experience</label>
-                            <input type="text" name="WorkExperience" id="WorkExperience" value={WorkExperience} onChange={this.changeHandler} />
+                            <label htmlFor="WorkExperience">Work Experience</label>
+                            <input type="text" name="WorkExperience" id="WorkExperience" value={WorkExperience} onChange={changeHandler} />
                         </div>
 
                         <div className="College">
-                            <label for="College">College</label>
-                            <input type="text" name="College" id="College" value={College} onChange={this.changeHandler} />
+                            <label htmlFor="College">College</label>
+                            <input type="text" name="College" id="College" value={College} onChange={changeHandler} />
                         </div>
                         <div className="createAccount">
                             <button type="submit">Create Account</button>
                             <small>Already Have Account?  <Link to="/login">Sign In</Link></small>
                         </div>
+                        {loading && <CircularProgress size={54} style={{ position:'absolute', top: '50%',left: '50%' }}/> }
+       
                     </form>
                 </div>
             </div >
         )
     }
-}
 
-export default Register
