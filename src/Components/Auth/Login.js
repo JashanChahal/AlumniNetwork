@@ -1,72 +1,81 @@
-import React, { useState} from 'react'
+import React, { useState,useContext} from 'react'
 import './login.css'
 import axios from 'axios'
+import {AuthContext} from '../../Context/AuthContext'
+import {TextField,CircularProgress} from '@material-ui/core';
 export default function Login(props) {
-    let [formError, formStateChange] = useState({
-        userNameError: '',
-        passwordError: ''
-    })
+    
+    const [authState,changeAuthState]=useContext(AuthContext)
 
-    const emailRegex = RegExp(
-        /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-    );
+    
+    const [loading, setLoading] = React.useState(false)
+    const [errorMessage,setErrorMessage]=useState(false)
+    const [formData, changeData] = useState({
+        email: "",
+        password: ""
+    })
 
     function handleChange(e) {
         var { type, value } = e.target;
-        let nameErr = '';
         switch (type) {
             case "email":
-                nameErr = emailRegex.test(value) && value.length > 0
-                    ? ""
-                    : "invalid email address";
-                console.log(nameErr)
-                break;
-            default:
-                console.log('error message');
+                formData.email= value;
+            break;
+            case "password":
+                formData.password= value;
+            break;
+            default: break;
         }
-        console.log('input is captured')
-        formStateChange({ ...formError, userNameError: nameErr })
-
+        changeData(formData);
     }
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log("running the method")
-        axios.post('http://localhost:8080/get_user_data', {
-            Name: 'Aditya Bansal',
-            Type: "Alumni"
+        console.log('inside submit')
+        setLoading(true);
+        axios.post('http://192.168.137.191:8080/Login', {
+            Type: "Alumni",
+            Email: formData.email,
+            Password: formData.password
         })
-            .then(res => console.log(res.data._id))
-            .catch(err => console.log(err))
-
+            .then(res => {
+                console.log(res)
+                setLoading(false)
+                changeAuthState({ ...authState,LoggedIn:true } )
+                props.history.push("/");
+            })
+            .catch(err => {
+                setLoading(false)
+                setErrorMessage(true);
+                })
+        console.log('handled submit')
     }
 
     return (
 
         <form onSubmit={handleSubmit} className="flex-column container col-10 col-md-6 col-lg-4 loginForm p-4" >
+            {errorMessage && <div className="alert alert-danger">Please Enter a valid email and password</div>}
             {console.log(props.match.params.type)}
-
-            <div class="form-group ">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" style={formError.userNameError.length > 0 ? { border: '1px solid red', boxShadow: 'none' } : null} id="exampleInputEmail1" aria-describedby="emailHelp" onChange={handleChange} />
-                <span>{formError.userNameError}</span>
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                
+             <div className="form-group ">
+                <TextField  label="Email"  variant="outlined" required  type="email" fullWidth onChange={handleChange}/> 
+                <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" onChange={handleChange} />
-                <span>{formError.password}</span>
-
+            <div className="form-group">
+                <TextField  label="Password"  variant="outlined" required  type="password" fullWidth onChange={handleChange}/>
             </div>
 
-            <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            <div className="form-group form-check">
+                <input type="checkbox" className="form-check-input" id="exampleCheck1" />
+                <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
             </div>
-            <button type="submit" class="btn btn-primary col" style={{ backgroundColor: '#519e8a' }}>Submit</button>
+
+            <button type="submit" className="btn btn-primary col" style={{ backgroundColor: '#519e8a' }}>Submit</button>
+            {loading && <CircularProgress size={24} style={{ position:'absolute', top: '40%',left: '45%', zIndex: '100' }}/> }
         </form>
 
     )
+
 
 
 }

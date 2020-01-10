@@ -37,7 +37,7 @@ const PostForm = (props) => {
         obj.append('Author',PostState.Author)
         obj.append('Text',PostState.Text)
         console.log(obj)
-        axios.post('http://63713223.ngrok.io/posts/create_post',obj);
+        axios.post('http://192.168.137.191:8080/posts/create_post',obj);
 
     }
     let wrapper = "postform-wrapper";
