@@ -1,10 +1,13 @@
 import React, { Component, useContext, useState } from 'react'
 import Backdrop from '../Navbar/Backdrop/Backdrop.js'
 import './PostForm.css'
+import { AuthContext } from '../../Context/AuthContext.js';
 import { PostContext } from '../../Context/PostContext.js';
 import axios from 'axios'
 const PostForm = (props) => {
 
+    const [authState,changeAuthState]=useState(AuthContext);
+    
     const [PostState, setPostState] = useState(
         {
             Author: '',
@@ -35,9 +38,17 @@ const PostForm = (props) => {
         const obj = new FormData()
         obj.append('postImage',PostState.Image,PostState.Image.name)
         obj.append('Author',PostState.Author)
-        obj.append('Text',PostState.Text)
-        console.log(obj)
-        axios.post('http://192.168.137.191:8080/posts/create_post',obj);
+        obj.append('Content',PostState.Text)
+        obj.append('Id', authState.Id)
+        obj.append('Name', authState.Name)
+        obj.append('Date', new Date().toLocaleDateString())
+        console.log(PostState.Image)
+        console.log(PostState.Text)
+        axios.post('http://192.168.43.60:8080/posts/create_post',obj).then(res=>{
+        props.history.push("/");
+    }).catch(err=>{
+        alert("something went wrong")
+    })
 
     }
     let wrapper = "postform-wrapper";

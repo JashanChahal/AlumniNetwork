@@ -33,7 +33,7 @@ export default function Login(props) {
         e.preventDefault();
         console.log('inside submit')
         setLoading(true);
-        axios.post('http://192.168.137.191:8080/Login', {
+        axios.post('http://10.42.0.97:8080/Login', {
             Type: "Alumni",
             Email: formData.email,
             Password: formData.password
@@ -41,8 +41,9 @@ export default function Login(props) {
             .then(res => {
                 console.log(res)
                 setLoading(false)
-                changeAuthState({ ...authState,LoggedIn:true } )
+                changeAuthState({ ...authState,LoggedIn:true,...res} )
                 props.history.push("/");
+                console.log('we are going out of here')
             })
             .catch(err => {
                 setLoading(false)
