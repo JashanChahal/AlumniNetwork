@@ -20,11 +20,8 @@
     "react-lottie": "^1.2.3",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.3.0",
-<<<<<<< HEAD
     "socket.io": "^2.3.0",
-=======
     "react-tabs": "^3.1.0",
->>>>>>> b19c8dc2d51ff846d89a74f2ea4056a09463de13
     "validator": "^12.1.0"
   },
   "scripts": {

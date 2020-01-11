@@ -55,7 +55,6 @@ export default function Login(props) {
     return (
         <form style={{pointerEvents: loading?'none':'auto'}} onSubmit={handleSubmit} className="flex-column container col-10 col-md-6 col-lg-4 loginForm p-4" >
             {errorMessage && <div className="alert alert-danger">Please Enter a valid email and password</div>}
-            {console.log(props.match.params.type)}
                 
              <div className="form-group ">
                 <TextField  label="Email"  variant="outlined" required  type="email" fullWidth onChange={handleChange}/> 

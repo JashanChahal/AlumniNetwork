@@ -10,6 +10,7 @@ import {AuthProvider} from './Context/AuthContext.js';
 import Dashboard from './Components/Dashboard/Dashboard';
 import { PostProvider } from './Context/PostContext';
 import Profile from './Components/Profile/Profile';
+import UpdateForm from './Components/Dashboard/UpdateForm.js'
 class App extends Component {
 
   render() {
@@ -22,8 +23,8 @@ class App extends Component {
             <Route exact path='/' component={Dashboard} />
             <Route exact path='/login' component={LoginType} />
             <Route exact path='/login/:type' component={Login} />
-            <Route exact path='/showprofile' component={Profile}/>
             <Route path='/register' component={Register} />
+            <Route path='/UpdateForm' component={UpdateForm} />
           </Router>
         </div>
         </PostProvider>

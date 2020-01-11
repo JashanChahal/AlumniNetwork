@@ -10,7 +10,7 @@ export default function hello(props)
         <Paper elevation={1} variant="elevation" square className="mt-3">
             <Card>
             <CardHeader
-                avatar={    props.loading ?<Skeleton variant="circle" width={40} height={40} />:
+                avatar={ props.loading ?<Skeleton variant="circle" width={40} height={40} />:
                 <Avatar aria-label="recipe"  src={props.photo}>
                 </Avatar>
                 }
