@@ -67,7 +67,7 @@ export default function Register(props) {
             .then(res => {
                 console.log(res)
                 setLoading(false)
-              props.history.push("/")    
+                 props.history.push("/")    
              })
             .catch(err => {
                 setLoading(false)
@@ -142,7 +142,7 @@ export default function Register(props) {
         setState({ ...state, formErrors:{...state.formErrors,formErrors}, [name]: e.target.value })
     }
         var { Name, Password, FatherName, MotherName, Email, Year, Branch, Cgpa, College, WorkExperience,Type,formErrors } = state
-        
+        console.log(formErrors)
         return (
             <div style={{pointerEvents: loading?'none':'auto'}} className="wrapper">
                 <div className="form-wrapper">

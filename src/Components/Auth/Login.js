@@ -41,8 +41,9 @@ export default function Login(props) {
             .then(res => {
                 console.log(res)
                 setLoading(false)
-                changeAuthState({ ...authState,LoggedIn:true } )
+                changeAuthState({ ...authState,LoggedIn:true,...res} )
                 props.history.push("/");
+                console.log('we are going out of here')
             })
             .catch(err => {
                 setLoading(false)
