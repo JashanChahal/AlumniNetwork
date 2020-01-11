@@ -4,16 +4,17 @@ import './Dashboard.css'
 import PostsShow from './PostsShow'
 import 'react-tabs/style/react-tabs.css'
 import Profile from './Profile'
-
+import { AuthContext } from '../../Context/AuthContext.js';
+import DefaultHome from './DefaultHome'
 
 
 export default function Dashboard() {
   
-   
+   const [authState,setAuthState]= useContext(AuthContext)
 
-   
-
-
+ if( authState.LoggedIn === true  )
+    return <DefaultHome/>
+  else
     return (
         <div>
          

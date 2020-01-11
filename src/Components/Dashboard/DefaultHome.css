@@ -1,0 +1,18 @@
+body{
+    background: url("images/bg3.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+div.headingDiv{
+    background-color: #27d9e7;
+}
+h1.heading{
+    font-family: 'Oswald', sans-serif;
+    color: black;
+    text-align: center;  
+    width:700px;
+    padding: 20px;
+    margin: 0 auto;
+    margin-top: 200px;
+    font-size: 3em;
+    color: white;
+}
