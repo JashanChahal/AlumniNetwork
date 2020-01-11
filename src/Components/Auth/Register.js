@@ -11,16 +11,15 @@ import io from 'socket.io-client';
 const emailRegex = RegExp(
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
-// var socket = io('http://10.42.0.97:8080', { transport: ['websocket'] });
+var socket = io('http://10.42.0.97:8080', { transport: ['websocket'] });
 
-// socket.on('notification', (res) => {
+socket.on('notification', (res) => {
     
-//     console.log(res);
-// })
+    console.log(res);
+})
 
 const formValid = state => {
-    let valid = true;
-    console.log("validity : "+state)
+    let valid = true
     Object.values(state).forEach(item=>{
         if(typeof item === 'object')
             Object.values(item).forEach(error=>  { error.length > 0 && (valid = false); })
@@ -42,7 +41,7 @@ export default function Register(props) {
             MotherName: '',
             Email: '',
             Year: '',
-            Subject: '',
+            Branch: '',
             Cgpa: '',
             College: '',
             WorkExperience: '',
@@ -54,7 +53,7 @@ export default function Register(props) {
                 MotherName: '',
                 Email: '',
                 Year: '',
-                Subject: '',
+                Branch: '',
                 Cgpa: ''      } })
       
     function submitHandler(e){
@@ -62,9 +61,9 @@ export default function Register(props) {
         if (formValid(state)) {
             setLoading(true)
             var obj = JSON.parse(JSON.stringify(state));
-            console.log(state)
+           
             delete obj.formErrors;
-            axios.post('http://192.168.137.191:8080/register',obj)
+            axios.post('http://10.42.0.97:8080/register',obj)
             .then(res => {
                 console.log(res)
                 setLoading(false)
@@ -124,8 +123,8 @@ export default function Register(props) {
                 else
                     formErrors.Year = "Enter a valid year";
                 break;
-            case "Subject":
-                formErrors.Subject =
+            case "Branch":
+                formErrors.Branch =
                     value.length < 3 && value.length > 0
                         ? "minimum 3 characters required"
                         : "";
@@ -142,8 +141,8 @@ export default function Register(props) {
         }
         setState({ ...state, formErrors:{...state.formErrors,formErrors}, [name]: e.target.value })
     }
-        var { Name, Password, FatherName, MotherName, Email, Year, Subject, Cgpa, College, WorkExperience,Type,formErrors } = state
-        console.log(formErrors)
+        var { Name, Password, FatherName, MotherName, Email, Year, Branch, Cgpa, College, WorkExperience,Type,formErrors } = state
+        
         return (
             <div style={{pointerEvents: loading?'none':'auto'}} className="wrapper">
                 <div className="form-wrapper">
@@ -202,11 +201,11 @@ export default function Register(props) {
                             )}
                         </div>
 
-                        <div className="Subject">
-                            <label htmlFor="Subject">Subject</label>
-                            <input type="text" name="Subject" id="Subject" className={formErrors.Subject.length > 0 ? "error" : null} value={Subject} onChange={changeHandler} />
-                            {(formErrors.Subject.length > 0) && (
-                                <span className="errorMessage">{formErrors.Subject}</span>
+                        <div className="Branch">
+                            <label htmlFor="Branch">Branch</label>
+                            <input type="text" name="Branch" id="Branch" className={formErrors.Branch.length > 0 ? "error" : null} value={Branch} onChange={changeHandler} />
+                            {(formErrors.Branch.length > 0) && (
+                                <span className="errorMessage">{formErrors.Branch}</span>
                             )}
                         </div>
 

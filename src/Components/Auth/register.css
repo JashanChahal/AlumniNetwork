@@ -103,7 +103,7 @@ light green: #A3C4BC
   .MotherName, 
   .Email, 
   .Year, 
-  .Subject, 
+.Branch, 
   .Cgpa, 
   .College, 
   .WorkExperience {
@@ -117,13 +117,13 @@ light green: #A3C4BC
     width: 49%;
   }
   .Year,
-  .Subject{
+.Branch{
       width:49% ;
   }
   .Year{
       margin-right: 1%;
   }
-  .Subject{
+.Branch{
       margin-left: 1%;
   }
   .Cgpa,
@@ -200,7 +200,7 @@ light green: #A3C4BC
     .MotherName, 
     .Email, 
     .Year, 
-    .Subject, 
+  .Branch, 
     .Cgpa, 
     .College, 
     .WorkExperience {

@@ -27,11 +27,18 @@ class Navbar extends Component {
                                 <Link className="nav-link text-white ml-5" to='/register' >Register</Link>
                             </li>
                             <li className="nav-item">
-                                <IconButton aria-label="show 11 new notifications" color="inherit">
-                                    <Badge badgeContent={19} color="secondary">
-                                        <NotificationsIcon />
-                                    </Badge>
-                                </IconButton>
+                                <div className="dropdown">
+                                    <IconButton  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <Badge badgeContent={19} color="secondary">
+                                            <NotificationsIcon />
+                                        </Badge>
+                                    </IconButton>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
+                                </div>
                             </li>
                         </ul>
                     </div>
