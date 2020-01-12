@@ -4,10 +4,19 @@ import './Dashboard.css'
 import PostsShow from './PostsShow'
 import 'react-tabs/style/react-tabs.css'
 import Profile from './Profile'
-
+import { AuthContext } from '../../Context/AuthContext.js';
+import DefaultHome from './DefaultHome'
 
 
 export default function Dashboard() {
+  
+   const [authState,setAuthState]= useContext(AuthContext)
+
+ if( authState.LoggedIn === false  )
+    return <DefaultHome/>
+  else
+  console.log('our State is: ')
+    console.log(authState)
     return (
         <div>
             <Tabs>
@@ -20,7 +29,7 @@ export default function Dashboard() {
                     <PostsShow />
                 </TabPanel>
                 <TabPanel>
-                    <Profile />
+                    <Profile/>
                 </TabPanel>
                 <TabPanel>
                     <h2>Group Chat</h2>

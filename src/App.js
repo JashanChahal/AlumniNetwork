@@ -9,6 +9,7 @@ import StartingComponent from './Components/Dashboard/Dashboard';
 import {AuthProvider} from './Context/AuthContext.js';
 import Dashboard from './Components/Dashboard/Dashboard';
 import { PostProvider } from './Context/PostContext';
+// import Profile from './Components/Profile/Profile';
 import UpdateForm from './Components/Dashboard/UpdateForm.js'
 class App extends Component {
 

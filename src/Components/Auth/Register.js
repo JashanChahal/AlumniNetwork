@@ -11,7 +11,7 @@ import io from 'socket.io-client';
 const emailRegex = RegExp(
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
-var socket = io('http://10.42.0.97:8080', { transport: ['websocket'] });
+var socket = io('http://192.168.43.60:8080', { transport: ['websocket'] });
 
 socket.on('notification', (res) => {
     
@@ -63,11 +63,12 @@ export default function Register(props) {
             var obj = JSON.parse(JSON.stringify(state));
            
             delete obj.formErrors;
-            axios.post('http://10.42.0.97:8080/register',obj)
+            console.log(obj)
+            axios.post('http://192.168.43.17:8080/register',obj)
             .then(res => {
                 console.log(res)
                 setLoading(false)
-                 props.history.push("/")    
+                 props.history.push("/login")    
              })
             .catch(err => {
                 setLoading(false)
