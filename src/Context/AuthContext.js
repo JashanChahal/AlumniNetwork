@@ -12,13 +12,14 @@ export const AuthProvider = (props)=>{
         Year: '2017',
         Branch: 'CSE',
         College: 'NIT Jalandhar',
-        LoggedIn:false,
-        Type:'visitor',
+        LoggedIn: false,
+        Type:'Visitor',
         logout : ()=>{
             setauthValue({ ...authValue,       
             Id:'',
             Name:'',
             Email:'',
+            Type:'Visitor',
             LoggedIn:false,})
         }
     })
