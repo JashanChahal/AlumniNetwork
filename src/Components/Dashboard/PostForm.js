@@ -33,7 +33,7 @@ const PostForm = (props) => {
         })
     }
     const SubmitHandler = (e) => {
-        e.preventDefault()
+      e.preventDefault()
         console.log("our auth state")
         console.log(authState)
         console.log(authState._id)
@@ -47,14 +47,15 @@ const PostForm = (props) => {
         obj.append('College', authState.College)
         obj.append('Date', new Date().toLocaleDateString())
         console.log(obj)
-        axios.post('http://192.168.43.17:8080/posts/create_post',obj).then(res=>{
-            console.log("SUCCESS IS IN MY BELT")
-            console.log(res)
-        // props.history.push("/");
-    }).catch(err=>{
-        alert("something went wrong")
-    })
-
+    //     axios.post('http://192.168.43.17:8080/posts/create_post',obj).then(res=>{
+    //         console.log("SUCCESS IS IN MY BELT")
+    //         console.log(res)
+    //     // props.history.push("/");
+    // }).catch(err=>{
+    //     alert("something went wrong")
+    // })
+    changeAuthState(auth=>[...auth])
+     window.location.reload(false)
     }
     let wrapper = "postform-wrapper";
     let postwrapper = "postwrapper";
@@ -70,7 +71,7 @@ const PostForm = (props) => {
     }
     return (
         <React.Fragment>
-
+            {console.log(authState)}
             <div className={postwrapper}>
                 <div className={wrapper} >
                     <h1>Create Post</h1>

@@ -23,13 +23,12 @@ function SideDrawer(props) {
     let Selement = (authState.LoggedIn && authState.Type !== "Visitor") && <IconButton component={Link} to="/Profile" linkButton={true} >
         <AccountCircleSharpIcon  />
     </IconButton>;
-    let SelenetNotLogged = (!authState.LoggedIn) && (<Link className="nav-link text-white ml-5" to='/Register'>Register</Link>);
-    let Telement = (authState.LoggedIn) ? (<IconButton onClick={()=>authState.logout()}><ExitToAppSharpIcon style={{color :"white"}}/></IconButton>) : (<Link className="nav-link text-white ml-5" to='/login'>Login</Link>);
+    let SelenetNotLogged = (!authState.LoggedIn) && (<Link className="nav-link text-white" to='/Register'>Register</Link>);
+    let Telement = (authState.LoggedIn) ? (<IconButton onClick={()=>authState.logout()}><ExitToAppSharpIcon /></IconButton>) : (<Link  to='/login'>Login</Link>);
     switch (authState.Type) {
 
         case "Visitor":
-            SelenetNotLogged = <Link className="nav-link text-white ml-5" to='/Register'>Register</Link>
-
+            SelenetNotLogged = <Link  to='/Register'>Register</Link>
             break;
         case 'College':
             Selement = (<div className="dropdown">
@@ -66,9 +65,9 @@ function SideDrawer(props) {
     return (
     <nav className={drawerClasses}>
         <span className="navbar-brand"><FontAwesomeIcon icon={faAcquisitionsIncorporated} size="2x"></FontAwesomeIcon></span>
-        <div className="ml-95">
+        <div className="container ml-95">
         <ul>    
-            <li>{Felement}</li>
+            <li >{Felement}</li>
             <li>{Selement}
             {SelenetNotLogged}</li>
             <li>{Telement}</li>
