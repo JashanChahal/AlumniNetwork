@@ -1,6 +1,7 @@
 import React, { Component,useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import {CircularProgress} from '@material-ui/core';
+import {CircularProgress,TextField  } from '@material-ui/core';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import "./register.css";
 import axios from 'axios'
 import { isObject } from 'util';
@@ -56,7 +57,10 @@ export default function Register(props) {
                 Branch: '',
                 Cgpa: ''      } })
       
+    const colleges=[{name: 'NIT Jalandhar'},{name:'NIT Kurushetra'},{name: 'NIT Jaipur'},{name: 'Thapar'},{name: 'LPU'}]
+    const branches=[{name: 'CSE'},{name: 'ECE'},{name: 'Civil'},{name: 'IPE'},{name: 'ICE'}]
     function submitHandler(e){
+        console.log(state)
         e.preventDefault()
         if (formValid(state)) {
             setLoading(true)
@@ -64,7 +68,7 @@ export default function Register(props) {
            
             delete obj.formErrors;
             console.log(obj)
-            axios.post('http://192.168.43.17:8080/register',obj)
+            axios.post('/register',obj)
             .then(res => {
                 console.log(res)
                 setLoading(false)
@@ -124,12 +128,12 @@ export default function Register(props) {
                 else
                     formErrors.Year = "Enter a valid year";
                 break;
-            case "Branch":
-                formErrors.Branch =
-                    value.length < 3 && value.length > 0
-                        ? "minimum 3 characters required"
-                        : "";
-                break;
+            // case "Branch":
+            //     formErrors.Branch =
+            //         value.length < 3 && value.length > 0
+            //             ? "minimum 3 characters required"
+            //             : "";
+            //     break;
             case "Cgpa":
                 formErrors.Cgpa =
                     Number(value) >= 4 && Number(value) <= 10
@@ -142,7 +146,7 @@ export default function Register(props) {
         }
         setState({ ...state, formErrors:{...state.formErrors,formErrors}, [name]: e.target.value })
     }
-        var { Name, Password, FatherName, MotherName, Email, Year, Branch, Cgpa, College, WorkExperience,Type,formErrors } = state
+        var { Name, Password, FatherName, MotherName, Email, Year, Branch, Cgpa, WorkExperience,Type,formErrors } = state
         console.log(formErrors)
         return (
             <div style={{pointerEvents: loading?'none':'auto'}} className="wrapper">
@@ -194,20 +198,28 @@ export default function Register(props) {
                             )}
                         </div>
 
-                        <div className='Year'>
-                            <label htmlFor="Year">Year</label>
-                            <input type="year" name="Year" id="Year" className={formErrors.Year.length > 0 ? "error" : null} value={Year} onChange={changeHandler} />
+                        <div className='Year mt-2'>
+                            <TextField label="Year" variant="outlined" fullWidth type="year" name="Year" id="Year" className={formErrors.Year.length > 0 ? "error" : null} value={Year} onChange={changeHandler} />
                             {(formErrors.Year.length > 0) && (
                                 <span className="errorMessage">{formErrors.Year}</span>
                             )}
                         </div>
 
-                        <div className="Branch">
-                            <label htmlFor="Branch">Branch</label>
-                            <input type="text" name="Branch" id="Branch" className={formErrors.Branch.length > 0 ? "error" : null} value={Branch} onChange={changeHandler} />
-                            {(formErrors.Branch.length > 0) && (
-                                <span className="errorMessage">{formErrors.Branch}</span>
-                            )}
+                        <div className="Branch mt-2">
+                        
+                        <Autocomplete
+                                name="Branch"
+                                options={branches}
+                                getOptionLabel={option => option.name}
+                                onInputChange={(event,value,reason)=> setState({...state,Branch: value}) }
+                                renderInput={params => (
+                                    <TextField {...params} label="Branch" variant="outlined" fullWidth />
+                                )}
+
+                                />
+                        
+                                
+                          
                         </div>
 
                         <div className="Cgpa">
@@ -223,9 +235,23 @@ export default function Register(props) {
                             <input type="text" name="WorkExperience" id="WorkExperience" value={WorkExperience} onChange={changeHandler} />
                         </div>
 
-                        <div className="College">
-                            <label htmlFor="College">College</label>
-                            <input type="text" name="College" id="College" value={College} onChange={changeHandler} />
+                            
+                        
+                        <div className="College mt-2">
+
+                        <Autocomplete
+                                name="College"
+                                id="combo-box-demo"
+                                options={colleges}
+                                getOptionLabel={option => option.name}
+                                onInputChange={(event,value,reason)=> setState({...state,College: value}) }
+                                renderInput={params => (
+                                    <TextField {...params} label="College" variant="outlined" fullWidth />
+                                )}
+
+                                />
+                            {/* <label htmlFor="College">College</label>
+                            <input type="text" name="College" id="College" value={College} onChange={changeHandler} /> */}
                         </div>
                         <div className="createAccount">
                             <button type="submit">Create Account</button>
@@ -235,7 +261,7 @@ export default function Register(props) {
        
                     </form>
                 </div>
-            </div >
+            </div>
         )
     }
 

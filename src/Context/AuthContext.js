@@ -4,21 +4,23 @@ export const AuthContext = createContext();
 export const AuthProvider = (props)=>{
     const [authValue,setauthValue] = useState({
         _id:'',
-        Name:'Jashan',
-        Email:'Chahaljashan123@gmail.com',
-        Cgpa: 8.39,
-        Year: '2017',
-        Branch: 'CSE',
-        College: 'NIT Jalandhar',
+        Name:'',
+        Email:'',
+        Cgpa: '',
+        Year: '',
+        Branch: '',
+        College: '',
         LoggedIn:false,
-        Type:'visitor',
+        Type:'Visitor',
         Experience: '',
         tokens: [],
+
         logout : ()=>{
             setauthValue({ ...authValue,       
             Id:'',
             Name:'',
             Email:'',
+            Type:'Visitor',
             LoggedIn:false,})
         }
     })

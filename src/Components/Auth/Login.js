@@ -4,7 +4,6 @@ import axios from 'axios'
 import {AuthContext} from '../../Context/AuthContext'
 import {TextField,CircularProgress} from '@material-ui/core';
 export default function Login(props) {
-    
     const [authState,changeAuthState]=useContext(AuthContext)
 
     
@@ -33,7 +32,7 @@ export default function Login(props) {
         e.preventDefault();
         setLoading(true);
         axios.post('/Login', {
-            Type: "Alumni",
+            Type: props.match.params.type,
             Email: formData.email,
             Password: formData.password
         })

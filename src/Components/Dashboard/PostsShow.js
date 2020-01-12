@@ -15,6 +15,24 @@ export default function PostsShow(){
     const [loading,setLoading]=useState(true);
     const [authState,changeAuthState]=useContext(AuthContext);
     const [On,setOn] = useContext(PostContext)
+
+    useEffect(()=>{
+            const data=localStorage.getItem('user-data')
+            if(data)
+                setData(JSON.parse(data))
+            const user_auth=localStorage.getItem('user-auth')
+            if(user_auth)
+                changeAuthState(JSON.parse(user_auth))
+            const loading=localStorage.getItem('loading')
+            if(loading)
+                setLoading(localStorage.parse(loading))
+    },[])
+    useEffect(()=>{
+        localStorage.setItem('user-data', JSON.stringify(data) )
+        localStorage.setItem('user-auth', JSON.stringify(authState) )
+        localStorage.setItem('loading', JSON.stringify(loading) )
+        
+    })
     var myStyle={
         padding: '20px',
         border: '1px solid grey'
@@ -61,7 +79,7 @@ export default function PostsShow(){
                             <div style={myStyle}>
                                 <FontAwesomeIcon icon={faEdit} size="lg" style={{padding: '5px'}}></FontAwesomeIcon>
                                 <button className="postButton" type="submit" onClick={()=> setOn(!On)} >Write something Here</button>
-                                <PostForm/>
+                                <PostForm />
                             </div> 
 
               { loading ? provider() : 

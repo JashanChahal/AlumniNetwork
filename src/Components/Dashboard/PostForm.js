@@ -33,7 +33,7 @@ const PostForm = (props) => {
         })
     }
     const SubmitHandler = async (e) => {
-        e.preventDefault()
+        // e.preventDefault()
         const obj = new FormData()
         obj.append('postImage',PostState.Image,PostState.Image.name)
         // obj.append('Author' ,PostState.Author)
@@ -50,11 +50,13 @@ const PostForm = (props) => {
             console.log("POST RESULT : ")
             console.log(result)
             setOn(!On);
-            
+            props.setData([...props.data,result])
         // props.history.push("/");
         }catch(err){        
             alert("something went wrong")
         }
+        changeAuthState(auth=>[...auth])
+        window.location.reload(false)
 
     // "http://192.168.43.60:8080/uploads/1578833806514periodic-table-of-tech-standalone_alt.jpg"
     }
@@ -63,7 +65,7 @@ const PostForm = (props) => {
     let Back
     const [On, setOn] = useContext(PostContext)
     const backDropHandler = (e) => {
-        setOn(!On)
+        // setOn(!On)
     }
     if (On) {
         postwrapper = "postwrapper open"
