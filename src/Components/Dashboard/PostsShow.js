@@ -27,12 +27,20 @@ export default function PostsShow(){
         return arr;
     }
 
+
+    // useEffect(() => {
+    //     console.log("we are fetching data")
+    //     axios.post("http://192.168.137.191:8080/posts/get_post_by_college",{
+    //         College: 'NIT Jalandhar'
+    //     })
+    //       .then(response => console.log(response))
+    //       .catch(err=> console.log('error') )
+    //   }, []);
+
     function download(){
-        // const fetchData = async () => {
-        //     console.log("we are in use effect")
-        //   const result = await
-           axios.post('http://192.168.43.17:8080/posts/get_post_by_college',{
-              College: 'NITJ'
+        console.log("we are in download section")
+           axios.post('http://192.168.137.191:8080/posts/get_post_by_college',{
+              College: authState.College
           })   //'https://uinames.com/api/?ext&&amount=10');
           .then(result=>{console.log("result :")
           console.log(result)
@@ -40,10 +48,11 @@ export default function PostsShow(){
           setData(result.data);
         })
         .catch(err=>console.log("we have error"))
-    //     fetchData();
-    //   }, []);
+
+        console.log("we are out of this shit")
     }
-    { loading && download()} 
+
+    { loading && download() } 
     return(
     <div className="container mt-4">
 
@@ -52,18 +61,16 @@ export default function PostsShow(){
                             <div style={myStyle}>
                                 <FontAwesomeIcon icon={faEdit} size="lg" style={{padding: '5px'}}></FontAwesomeIcon>
                                 <button className="postButton" type="submit" onClick={()=> setOn(!On)} >Write something Here</button>
-                                <PostForm />
+                                <PostForm/>
                             </div> 
 
-                    
-                    
-            
-            { loading ? provider() : 
+              { loading ? provider() : 
                 data.map(item=>{
                 console.log('its the time')
-                return <PostLayout loading={loading}/>
-                {/* return <PostLayout loading={loading} name={item.name} birthday={item.birthday.dmy} photo={item.photo} email={item.email}/> */}
-             })
+                {/* return <PostLayout loading={loading}  photo={item.PostImage}/> */}
+                return <PostLayout loading={loading} name={item.Name} content={item.Content} date={item.Date} photo={item.postImage} likes={item.NoOfLikes} comments={item.NoOfComments} postId={item._id}/>
+                    {/* return <div> GOT THE DATA</div> */}
+                    })
             }
             
               

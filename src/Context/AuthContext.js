@@ -1,6 +1,4 @@
 import React,{createContext,useState} from 'react';
-
-
 export const AuthContext = createContext();
 
 export const AuthProvider = (props)=>{
@@ -14,6 +12,8 @@ export const AuthProvider = (props)=>{
         College: 'NIT Jalandhar',
         LoggedIn:false,
         Type:'visitor',
+        Experience: '',
+        tokens: [],
         logout : ()=>{
             setauthValue({ ...authValue,       
             Id:'',

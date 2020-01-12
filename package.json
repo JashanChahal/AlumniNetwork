@@ -32,6 +32,7 @@
     "server": "node server/server.js",
     "dev": "run-p start server"
   },
+  "proxy": "http://192.168.137.191:8080",
   "eslintConfig": {
     "extends": "react-app"
   },

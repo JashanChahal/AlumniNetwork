@@ -31,31 +31,22 @@ export default function Login(props) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log('inside submit')
         setLoading(true);
-        axios.post('http://192.168.43.17:8080/Login', {
+        axios.post('/Login', {
             Type: "Alumni",
             Email: formData.email,
             Password: formData.password
         })
             .then(res => {
-                console.log(res)
+                console.log({...authState, ...res.data, LoggedIn: true})
                 setLoading(false)
-                console.log("set our state to :")
-                var obj={...authState, _id: res.data._id, Name: res.data.Name,Email: res.data.Email,College: res.data.College}
-                console.log(obj)
-                // console.log(res.data)
-                changeAuthState({...authState, _id: res.data._id, Name: res.data.Name,Email: res.data.Email,College: res.data.College})
-                // console.log("new State is: ")
-                // console.log(authState)
+                changeAuthState({...authState, ...res.data, LoggedIn: true})
                 props.history.push("/");
-                console.log('we are going out of here')
             })
             .catch(err => {
                 setLoading(false)
                 setErrorMessage(true);
                 })
-        console.log('handled submit')
     }
 
     return (

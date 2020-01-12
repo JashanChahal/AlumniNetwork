@@ -32,29 +32,31 @@ const PostForm = (props) => {
             Author, Text, [name]: e.target.files[0]
         })
     }
-    const SubmitHandler = (e) => {
+    const SubmitHandler = async (e) => {
         e.preventDefault()
-        console.log("our auth state")
-        console.log(authState)
-        console.log(authState._id)
         const obj = new FormData()
         obj.append('postImage',PostState.Image,PostState.Image.name)
         // obj.append('Author' ,PostState.Author)
-        // obj.append('Content',PostState.Text)
+        obj.append('Content',PostState.Text)
         obj.append('_id', authState._id)
         obj.append('Name', authState.Name)
-        
+        obj.append('Type',authState.Type)
         obj.append('College', authState.College)
         obj.append('Date', new Date().toLocaleDateString())
-        console.log(obj)
-        axios.post('http://192.168.43.17:8080/posts/create_post',obj).then(res=>{
-            console.log("SUCCESS IS IN MY BELT")
-            console.log(res)
+        // console.log(obj)
+        try
+        {
+        var result= await axios.post('http://192.168.137.191:8080/posts/create_post',obj)
+            console.log("POST RESULT : ")
+            console.log(result)
+            setOn(!On);
+            
         // props.history.push("/");
-    }).catch(err=>{
-        alert("something went wrong")
-    })
+        }catch(err){        
+            alert("something went wrong")
+        }
 
+    // "http://192.168.43.60:8080/uploads/1578833806514periodic-table-of-tech-standalone_alt.jpg"
     }
     let wrapper = "postform-wrapper";
     let postwrapper = "postwrapper";

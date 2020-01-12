@@ -4,11 +4,10 @@
     left: 10px;
     height: 100%;
     width: 100%;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-      /* background-color: #FCFCFC; */
     padding-top : 30px;
     padding-left: 20%;
     padding-right: 20%;
@@ -17,6 +16,7 @@
   }
   .postwrapper.open{
     z-index: 300;
+    display: flex;
   }
   
   .postform-wrapper {
@@ -24,7 +24,7 @@
     top: 50px;
     left: 10px;
       width: 80%;
-    display: flex;
+    display: none;
     flex-direction: column;
     padding: 20px 40px;
     border-radius: 25px;
@@ -33,10 +33,10 @@
     z-index: 300;
       transform: translateY(-500%);
     transition: transform 0.4s ease;
-    /* margin-top: -1500px; */
   }
   .postform-wrapper.open{
     transform: translateY(0);
     transition: transform 0.4s ease;
     margin-top: 0px;
+    display: flex;
   }

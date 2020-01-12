@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, {useContext} from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import './Dashboard.css'
 import PostsShow from './PostsShow'
@@ -15,8 +15,6 @@ export default function Dashboard() {
  if( authState.LoggedIn === false  )
     return <DefaultHome/>
   else
-  console.log('our State is: ')
-    console.log(authState)
     return (
         <div>
             <Tabs>
