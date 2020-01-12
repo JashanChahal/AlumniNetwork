@@ -13,7 +13,8 @@ medium green: #7EB09B
 light green: #A3C4BC
 */
 
-.wrapper {
+.updatewrapper {
+
     height: 100%;
     width: 100%;
     display: flex;
@@ -28,7 +29,8 @@ light green: #A3C4BC
     
   }
   
-  .form-wrapper {
+  .updateform-wrapper {
+
     width: 80%;
     height: 80%;
     display: flex;
@@ -44,7 +46,9 @@ light green: #A3C4BC
   form {
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap;   
+
+
   }
   
   h1 {
@@ -149,9 +153,25 @@ light green: #A3C4BC
     flex-direction: column;
     align-items: center;
   }
+  .danger {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   
   .createAccount button {
     background-color: #519e8a;
+    color: #fff;
+    border: 2px solid #fff;
+    width: 100%;
+    margin-top: 1em;
+    padding: 8px 0px;
+    letter-spacing: 1px;
+    margin-bottom: 0.25em;
+  }
+  .danger button {
+    background-color:rgb(196, 35, 35);
     color: #fff;
     border: 2px solid #fff;
     width: 100%;

@@ -13,7 +13,7 @@ export default function PostsShow(){
     
     const [data,setData]=useState([])
     const [loading,setLoading]=useState(true);
-    const [authState,changeAuthState]=useState(AuthContext);
+    const [authState,changeAuthState]=useContext(AuthContext);
     const [On,setOn] = useContext(PostContext)
     var myStyle={
         padding: '20px',
@@ -27,17 +27,23 @@ export default function PostsShow(){
         return arr;
     }
 
-    useEffect(() => {
-        const fetchData = async () => {
-          const result = await axios.get('https://uinames.com/api/?ext&&amount=10');
-          console.log("result :")
+    function download(){
+        // const fetchData = async () => {
+        //     console.log("we are in use effect")
+        //   const result = await
+           axios.post('http://192.168.43.17:8080/posts/get_post_by_college',{
+              College: 'NITJ'
+          })   //'https://uinames.com/api/?ext&&amount=10');
+          .then(result=>{console.log("result :")
           console.log(result)
           setLoading(false)
           setData(result.data);
-        };
-        fetchData();
-      }, []);
-
+        })
+        .catch(err=>console.log("we have error"))
+    //     fetchData();
+    //   }, []);
+    }
+    { loading && download()} 
     return(
     <div className="container mt-4">
 
@@ -50,13 +56,17 @@ export default function PostsShow(){
                             </div> 
 
                     
-                    {   
+                    
             
-            (loading ? provider() : data.map(item=>{
+            { loading ? provider() : 
+                data.map(item=>{
                 console.log('its the time')
-                return <PostLayout loading={loading} name={item.name} birthday={item.birthday.dmy} photo={item.photo} email={item.email}/>
-            }) )
-        }      
+                return <PostLayout loading={loading}/>
+                {/* return <PostLayout loading={loading} name={item.name} birthday={item.birthday.dmy} photo={item.photo} email={item.email}/> */}
+             })
+            }
+            
+              
                     </div>
     
             </div>

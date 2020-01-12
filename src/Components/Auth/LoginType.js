@@ -10,7 +10,7 @@ export default function Login(){
             <div>Already LoggedIn</div>
         )
     }
-    
+    else
     return (
         <div className="container" >
             <div className="row  justify-content-md-around flex-md-row flex-column mt-5">

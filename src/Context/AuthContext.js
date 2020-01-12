@@ -5,13 +5,13 @@ export const AuthContext = createContext();
 
 export const AuthProvider = (props)=>{
     const [authValue,setauthValue] = useState({
-        Id:'',
-        Name:'',
-        Email:'',
-        Cgpa: 0,
-        Year: '',
-        Branch: '',
-        College: '',
+        _id:'',
+        Name:'Jashan',
+        Email:'Chahaljashan123@gmail.com',
+        Cgpa: 8.39,
+        Year: '2017',
+        Branch: 'CSE',
+        College: 'NIT Jalandhar',
         LoggedIn:false,
         Type:'visitor',
         logout : ()=>{

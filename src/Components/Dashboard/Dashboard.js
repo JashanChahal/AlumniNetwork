@@ -1,4 +1,4 @@
-import React,{useState,useContext,useEffect} from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import './Dashboard.css'
 import PostsShow from './PostsShow'
@@ -12,45 +12,32 @@ export default function Dashboard() {
   
    const [authState,setAuthState]= useContext(AuthContext)
 
- if( authState.LoggedIn === true  )
+ if( authState.LoggedIn === false  )
     return <DefaultHome/>
   else
+  console.log('our State is: ')
+    console.log(authState)
     return (
         <div>
-         
+            <Tabs>
+                <TabList >
+                    <Tab >Events</Tab>
+                    <Tab>Profile</Tab>
+                    <Tab>Group Chat</Tab>
+                </TabList>
+                <TabPanel>
+                    <PostsShow />
+                </TabPanel>
+                <TabPanel>
+                    <Profile/>
+                </TabPanel>
+                <TabPanel>
+                    <h2>Group Chat</h2>
+                </TabPanel>
+            </Tabs>
 
-
-        
-         <Tabs>
-    <TabList >
-      <Tab >Events</Tab> 
-      <Tab>Profile</Tab>
-      <Tab>Group Chat</Tab>
-    </TabList>
-
-
-    <TabPanel>
-      <PostsShow/>
-    </TabPanel>
-    <TabPanel>
-      <Profile/>
-    </TabPanel>
-    <TabPanel>
-        <h2>Group Chat</h2>
-    </TabPanel>
-  </Tabs>
-
-
-
-
-
-        {/* <div style={myStyle}>
-            fdsgfs
-        </div> */}
-        
-       
         </div>
-    
+
     )
 }
 

@@ -1,22 +1,18 @@
-import React, { Component,useState } from 'react';
+import React, { Component,useState,useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import {CircularProgress} from '@material-ui/core';
-import "./register.css";
+import "./UpdateForm.css";
 import axios from 'axios'
+import { AuthContext } from '../../Context/AuthContext'
 import { isObject } from 'util';
 // import {io} from 'socket.io';
 import { Socket } from 'dgram';
 import io from 'socket.io-client';
-
+import {hashHistory} from 'react-router';
 const emailRegex = RegExp(
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
-var socket = io('http://192.168.43.60:8080', { transport: ['websocket'] });
 
-socket.on('notification', (res) => {
-    
-    console.log(res);
-})
 
 const formValid = state => {
     let valid = true
@@ -30,25 +26,23 @@ const formValid = state => {
     
     return valid;
 }
-export default function Register(props) {
-
+export default function UpdateForm(props) {
+    var [authContext, setAuthContext] = useContext(AuthContext);
     const [loading, setLoading] = useState(false)
     const [errorMessage,setErrorMessage]=useState(false)
     const [state,setState]=useState({
-            Name: '',
-            Password: '',
+            Name: authContext.Name,
             FatherName: '',
             MotherName: '',
-            Email: '',
-            Year: '',
-            Branch: '',
-            Cgpa: '',
-            College: '',
+            Email: authContext.Email,
+            Year: authContext.Year,
+            Branch: authContext.Branch,
+            Cgpa: authContext.Cgpa,
+            College: authContext.College,
             WorkExperience: '',
             Type: 'Alumini',
             formErrors: {
                 Name: '',
-                Password: '',
                 FatherName: '',
                 MotherName: '',
                 Email: '',
@@ -63,12 +57,11 @@ export default function Register(props) {
             var obj = JSON.parse(JSON.stringify(state));
            
             delete obj.formErrors;
-            console.log(obj)
-            axios.post('http://192.168.43.17:8080/register',obj)
+            axios.post('http://10.42.0.97:8080/register',obj)
             .then(res => {
                 console.log(res)
                 setLoading(false)
-                 props.history.push("/login")    
+                 props.history.push("/")    
              })
             .catch(err => {
                 setLoading(false)
@@ -89,18 +82,7 @@ export default function Register(props) {
                     formErrors.Name = "";
 
                 break;
-            case "Password":
-                let val = true;
-                if (value.length < 6)
-                    val = false;
-                var numUpper = (value.match(/[A-Z]/g) || []).length;
-                if (numUpper == 0 || numUpper == value.length)
-                    val = false;
-                if (val == false)
-                    formErrors.Password = "Password should be combination of uppercase and lowercase letters with minimum 6 letters";
-                else
-                    formErrors.Password = ""
-                break;
+
             case "MotherName":
                 formErrors.MotherName =
                     value.length < 3 && value.length > 0
@@ -142,12 +124,12 @@ export default function Register(props) {
         }
         setState({ ...state, formErrors:{...state.formErrors,formErrors}, [name]: e.target.value })
     }
-        var { Name, Password, FatherName, MotherName, Email, Year, Branch, Cgpa, College, WorkExperience,Type,formErrors } = state
+        var { Name, FatherName, MotherName, Email, Year, Branch, Cgpa, College, WorkExperience,Type,formErrors } = state
         console.log(formErrors)
         return (
             <div style={{pointerEvents: loading?'none':'auto'}} className="wrapper">
                 <div className="form-wrapper">
-                    <h1>Create Account</h1>
+                    <h1>Update Your Details</h1>
                     {/* <p className="lead"><FontAwesomeIcon icon={faUser} /> Create Your Account</p> */}
                     <form onSubmit={submitHandler} noValidate>
                     {errorMessage && <div className="alert alert-danger col">Please check your Internet Connection</div>}
@@ -186,13 +168,6 @@ export default function Register(props) {
                             )}
                         </div>
 
-                        <div className="Password">
-                            <label htmlFor="Password">Password</label>
-                            <input type="password" name="Password" id="Password" className={formErrors.Password.length > 0 ? "error" : null} value={Password} onChange={changeHandler} />
-                            {(formErrors.Password.length > 0) && (
-                                <span className="errorMessage">{formErrors.Password}</span>
-                            )}
-                        </div>
 
                         <div className='Year'>
                             <label htmlFor="Year">Year</label>
@@ -228,8 +203,11 @@ export default function Register(props) {
                             <input type="text" name="College" id="College" value={College} onChange={changeHandler} />
                         </div>
                         <div className="createAccount">
-                            <button type="submit">Create Account</button>
-                            <small>Already Have Account?  <Link to="/login">Sign In</Link></small>
+                            <button type="submit">Update</button>
+                            
+                        </div>
+                        <div className="danger">
+                        <button  onClick={()=> props.history.push("/")}>Cancel</button>
                         </div>
                         {loading && <CircularProgress size={54} style={{ position:'absolute', top: '50%',left: '50%' }}/> }
        
@@ -237,5 +215,6 @@ export default function Register(props) {
                 </div>
             </div >
         )
+
     }
 

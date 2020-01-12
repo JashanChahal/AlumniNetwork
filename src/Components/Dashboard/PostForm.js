@@ -6,7 +6,7 @@ import { PostContext } from '../../Context/PostContext.js';
 import axios from 'axios'
 const PostForm = (props) => {
 
-    const [authState,changeAuthState]=useState(AuthContext);
+    const [authState,changeAuthState]=useContext(AuthContext);
     
     const [PostState, setPostState] = useState(
         {
@@ -34,18 +34,23 @@ const PostForm = (props) => {
     }
     const SubmitHandler = (e) => {
         e.preventDefault()
-        
+        console.log("our auth state")
+        console.log(authState)
+        console.log(authState._id)
         const obj = new FormData()
         obj.append('postImage',PostState.Image,PostState.Image.name)
-        obj.append('Author',PostState.Author)
-        obj.append('Content',PostState.Text)
-        obj.append('Id', authState.Id)
+        // obj.append('Author' ,PostState.Author)
+        // obj.append('Content',PostState.Text)
+        obj.append('_id', authState._id)
         obj.append('Name', authState.Name)
+        
+        obj.append('College', authState.College)
         obj.append('Date', new Date().toLocaleDateString())
-        console.log(PostState.Image)
-        console.log(PostState.Text)
-        axios.post('http://192.168.43.60:8080/posts/create_post',obj).then(res=>{
-        props.history.push("/");
+        console.log(obj)
+        axios.post('http://192.168.43.17:8080/posts/create_post',obj).then(res=>{
+            console.log("SUCCESS IS IN MY BELT")
+            console.log(res)
+        // props.history.push("/");
     }).catch(err=>{
         alert("something went wrong")
     })
