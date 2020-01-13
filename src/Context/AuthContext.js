@@ -12,7 +12,7 @@ export const AuthProvider = (props)=>{
         College: '',
         LoggedIn:false,
         Type:'Visitor',
-        Experience: '',
+        WorkExperience: '',
         tokens: [],
 
         logout : ()=>{

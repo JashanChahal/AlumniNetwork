@@ -47,14 +47,14 @@ useEffect(()=>{
         // })
 
 
-    let Felement = <IconButton component={Link} to="/" linkButton={true} >
+    let Felement = <IconButton component={Link} to={authState.LoggedIn ? "/Dashboard": '/' } linkButton={true} >
         <HomeSharpIcon style={{ color: "white" }} />
     </IconButton>;
     let Selement = (authState.LoggedIn && authState.Type !== "Visitor") && <IconButton component={Link} to="/Profile" linkButton={true} >
         <AccountCircleSharpIcon style={{ color: "white" }} />
     </IconButton>;  
     let SelenetNotLogged = (!authState.LoggedIn) && (<Link className="nav-link text-white ml-5" to='/Register'>Register</Link>);
-    let Telement = (authState.LoggedIn) ? (<IconButton component={Link} to='/' onClick={()=> {setauthState({...authState,LoggedIn: false}); } }><ExitToAppSharpIcon style={{color :"white"}}/></IconButton>) : (<Link className="nav-link text-white ml-5" to='/login'>Login</Link>);
+    let Telement = (authState.LoggedIn) ? (<IconButton component={Link} to='/' onClick={()=> {setauthState({...authState,LoggedIn: false}); localStorage.clear(); } }><ExitToAppSharpIcon style={{color :"white"}}/></IconButton>) : (<Link className="nav-link text-white ml-5" to='/login'>Login</Link>);
     switch (authState.Type) {
 
         case "Visitor":

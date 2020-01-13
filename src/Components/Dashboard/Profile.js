@@ -27,8 +27,9 @@ export default function Profile() {
     return <Redirect to="/updateForm/" />
     else {
         return (
-            
             <div class="container">
+                
+            {console.log(authState.Branch)}
                 <div className="row justify-content-around">
                     <div className="col-md-8">
                         <Paper elevation={1} variant="elevation" square className="mt-3">

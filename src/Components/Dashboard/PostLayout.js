@@ -1,8 +1,9 @@
 import React,{useContext} from 'react'
-import {Card,CardHeader,CardMedia,CardContent,Avatar,Typography,Paper} from   '@material-ui/core'
+import {Card,CardHeader,CardMedia,CardContent,Avatar,Typography,Paper, IconButton} from   '@material-ui/core'
 import {Skeleton} from '@material-ui/lab'
 import {AuthContext} from '../../Context/AuthContext'
 import axios from 'axios'
+import ThumbUpAltTwoToneIcon from '@material-ui/icons/ThumbUpAltTwoTone';
 
 
 export default function Hello(props)
@@ -11,6 +12,7 @@ export default function Hello(props)
   const [authState,setAuthState]= useContext(AuthContext)
 
     function handleClick(){
+
       axios.post('/posts/like_post',{
             Id: props.postId,
             UserId: authState._id         
@@ -34,7 +36,9 @@ export default function Hello(props)
       <div className="p-2">{props.content}</div>
       { props.loading ? <Skeleton variant="rect" height={250}/> : <img src={'/'+props.photo} className="mx-auto d-block img-fluid" /> } 
       <CardContent>
-      <button onClick={handleClick}>Like</button>
+    {/* Like Button */}
+     <IconButton  > <ThumbUpAltTwoToneIcon fontSizeLarge color='primary'/>  </IconButton>
+     
         <Typography variant="body2" color="textSecondary" component="p">
           {props.loading?  <Skeleton variant="rect"/> : <p> <span> {props.likes} </span>  <span> {props.comments} </span> </p>}
         </Typography>
