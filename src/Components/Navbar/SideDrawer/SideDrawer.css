@@ -19,6 +19,7 @@
 
 }
 .side-drawer.open{
+    text-align: center;
     transform: translateX(0);
     transition: transform 0.3 ease;
 }

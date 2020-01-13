@@ -11,11 +11,10 @@ import DefaultHome from './DefaultHome'
 export default function Dashboard() {
   
    const [authState,setAuthState]= useContext(AuthContext)
-
- if( authState.LoggedIn === false  )
-    return <DefaultHome/>
-  else
-    return (
+  
+   console.log("on Dashboard")
+   console.log(authState)
+   return (
         <div>
             <Tabs>
                 <TabList >

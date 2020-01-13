@@ -1,4 +1,4 @@
-import React, { Component, useContext } from 'react';
+import React, { useEffect, useContext,useState } from 'react';
 import DrawerToggleButton from './SideDrawer/DrawerToggleButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAcquisitionsIncorporated } from '@fortawesome/free-brands-svg-icons';
@@ -11,9 +11,42 @@ import { AuthContext } from '../../Context/AuthContext.js'
 import AccountCircleSharpIcon from '@material-ui/icons/AccountCircleSharp';
 import { faBreadSlice } from '@fortawesome/free-solid-svg-icons';
 import ExitToAppSharpIcon from '@material-ui/icons/ExitToAppSharp';
+import { Redirect } from "react-router-dom";
 
 export default function Navbar(props) {
+
+    
     const [authState, setauthState] = useContext(AuthContext)
+
+    useEffect(()=>{
+        const data=localStorage.getItem('auth-data')
+        if(data)
+            setauthState(JSON.parse(data))
+   
+        
+        // const loading=localStorage.getItem('loading')
+        // if(loading)
+        //     setLoading(JSON.parse(loading))
+},[])
+useEffect(()=>{
+    localStorage.setItem('auth-data', JSON.stringify(authState) )
+    
+})
+
+        // useEffect(()=>{
+        // const data=localStorage.getItem('auth-data')
+        // if(data)
+        //     setauthState(JSON.parse(data))
+        // const user_auth=localStorage.getItem('user-auth')
+            
+        // },[])
+
+        // useEffect(()=>{
+        //     localStorage.setItem('auth-data', JSON.stringify(authState) )
+            
+        // })
+
+
     let Felement = <IconButton component={Link} to="/" linkButton={true} >
         <HomeSharpIcon style={{ color: "white" }} />
     </IconButton>;
@@ -21,7 +54,7 @@ export default function Navbar(props) {
         <AccountCircleSharpIcon style={{ color: "white" }} />
     </IconButton>;  
     let SelenetNotLogged = (!authState.LoggedIn) && (<Link className="nav-link text-white ml-5" to='/Register'>Register</Link>);
-    let Telement = (authState.LoggedIn) ? (<IconButton onClick={()=>authState.logout()}><ExitToAppSharpIcon style={{color :"white"}}/></IconButton>) : (<Link className="nav-link text-white ml-5" to='/login'>Login</Link>);
+    let Telement = (authState.LoggedIn) ? (<IconButton component={Link} to='/' onClick={()=> {setauthState({...authState,LoggedIn: false}); } }><ExitToAppSharpIcon style={{color :"white"}}/></IconButton>) : (<Link className="nav-link text-white ml-5" to='/login'>Login</Link>);
     switch (authState.Type) {
 
         case "Visitor":
@@ -59,9 +92,10 @@ export default function Navbar(props) {
         default:
             break;
     }
-    return (
+    let myStyle={backgroundColor: "rgba(0, 0, 0)",background: "transperant" }
+    return ( 
         <div>
-            <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: "rgba(12, 99, 150)" }}>
+            <nav className="navbar navbar-expand-lg navbar-light" style={myStyle}>
                 <DrawerToggleButton click={props.drawerClickHandler}></DrawerToggleButton>
                 <a className="navbar-brand text-white" href="#"><FontAwesomeIcon icon={faAcquisitionsIncorporated} size="lg"></FontAwesomeIcon><strong> Alumni Network</strong></a>
 

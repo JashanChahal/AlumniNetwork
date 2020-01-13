@@ -1,6 +1,8 @@
 import React, { Component, useContext, useState } from 'react'
 import Backdrop from '../Navbar/Backdrop/Backdrop.js'
 import './PostForm.css'
+
+import {TextField,CircularProgress} from '@material-ui/core';
 import { AuthContext } from '../../Context/AuthContext.js';
 import { PostContext } from '../../Context/PostContext.js';
 import axios from 'axios'
@@ -8,6 +10,7 @@ const PostForm = (props) => {
 
     const [authState,changeAuthState]=useContext(AuthContext);
     
+    const [loading, setLoading] = useState(false)
     const [PostState, setPostState] = useState(
         {
             Author: '',
@@ -33,7 +36,7 @@ const PostForm = (props) => {
         })
     }
     const SubmitHandler = async (e) => {
-        // e.preventDefault()
+        e.preventDefault()
         const obj = new FormData()
         obj.append('postImage',PostState.Image,PostState.Image.name)
         // obj.append('Author' ,PostState.Author)
@@ -43,20 +46,25 @@ const PostForm = (props) => {
         obj.append('Type',authState.Type)
         obj.append('College', authState.College)
         obj.append('Date', new Date().toLocaleDateString())
-        // console.log(obj)
+        console.log('making a post request')
+        console.log(obj)
         try
         {
-        var result= await axios.post('http://192.168.137.191:8080/posts/create_post',obj)
+            setLoading(true)
+        var result= await axios.post('/posts/create_post',obj)
             console.log("POST RESULT : ")
             console.log(result)
             setOn(!On);
-            props.setData([...props.data,result])
+            setLoading(false)
+            window.location.reload();
+            // props.setData([...props.data,result])
         // props.history.push("/");
-        }catch(err){        
+        }catch(err){      
+             
             alert("something went wrong")
+            setLoading(false)
         }
-        changeAuthState(auth=>[...auth])
-        window.location.reload(false)
+        
 
     // "http://192.168.43.60:8080/uploads/1578833806514periodic-table-of-tech-standalone_alt.jpg"
     }
@@ -65,7 +73,7 @@ const PostForm = (props) => {
     let Back
     const [On, setOn] = useContext(PostContext)
     const backDropHandler = (e) => {
-        // setOn(!On)
+        setOn(!On)
     }
     if (On) {
         postwrapper = "postwrapper open"
@@ -74,7 +82,7 @@ const PostForm = (props) => {
     }
     return (
         <React.Fragment>
-
+            {console.log(authState)}
             <div className={postwrapper}>
                 <div className={wrapper} >
                     <h1>Create Post</h1>
@@ -84,6 +92,8 @@ const PostForm = (props) => {
                         <button type="submit" className="btn btn-primary">Post</button>
                     </form>
                 </div>
+                {loading && <CircularProgress size={24} style={{ position:'absolute', top: '40%',left: '45%', zIndex: '100' }}/> }
+       
             </div>
             {Back}
 

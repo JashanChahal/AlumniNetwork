@@ -16,8 +16,9 @@ export const AuthProvider = (props)=>{
         tokens: [],
 
         logout : ()=>{
+            // localStorage.setItem('login',false)
             setauthValue({ ...authValue,       
-            Id:'',
+            _id:'',
             Name:'',
             Email:'',
             Type:'Visitor',

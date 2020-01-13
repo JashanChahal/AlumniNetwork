@@ -1,6 +1,6 @@
 import React,{useContext,useState,useEffect} from 'react'
 import axios from 'axios'
-
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import PostForm from './PostForm.js'
 import PostLayout from './PostLayout'
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
@@ -15,7 +15,7 @@ export default function PostsShow(){
     const [loading,setLoading]=useState(true);
     const [authState,changeAuthState]=useContext(AuthContext);
     const [On,setOn] = useContext(PostContext)
-
+    
     useEffect(()=>{
             const data=localStorage.getItem('user-data')
             if(data)
@@ -23,9 +23,10 @@ export default function PostsShow(){
             const user_auth=localStorage.getItem('user-auth')
             if(user_auth)
                 changeAuthState(JSON.parse(user_auth))
-            const loading=localStorage.getItem('loading')
-            if(loading)
-                setLoading(localStorage.parse(loading))
+            
+            // const loading=localStorage.getItem('loading')
+            // if(loading)
+            //     setLoading(JSON.parse(loading))
     },[])
     useEffect(()=>{
         localStorage.setItem('user-data', JSON.stringify(data) )
@@ -57,7 +58,7 @@ export default function PostsShow(){
 
     function download(){
         console.log("we are in download section")
-           axios.post('http://192.168.137.191:8080/posts/get_post_by_college',{
+           axios.post('/posts/get_post_by_college',{
               College: authState.College
           })   //'https://uinames.com/api/?ext&&amount=10');
           .then(result=>{console.log("result :")
@@ -71,6 +72,8 @@ export default function PostsShow(){
     }
 
     { loading && download() } 
+    if(authState.LoggenIn===false)  return <Redirect to='/' />
+        else
     return(
     <div className="container mt-4">
 

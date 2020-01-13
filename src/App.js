@@ -9,8 +9,11 @@ import StartingComponent from './Components/Dashboard/Dashboard';
 import {AuthProvider} from './Context/AuthContext.js';
 import Dashboard from './Components/Dashboard/Dashboard';
 import { PostProvider } from './Context/PostContext';
-// import Profile from './Components/Profile/Profile';
+import Profile from './Components/Dashboard/Profile';
 import UpdateForm from './Components/Dashboard/UpdateForm.js'
+import DefaultHome from './Components/Dashboard/DefaultHome';
+import PageNotFound from './Components/Dashboard/PageNotFound'
+
 class App extends Component {
 
   render() {
@@ -20,11 +23,16 @@ class App extends Component {
         <div className="App" style={{ height: '100%' }}>
           <Router>
             <Navbarhandler />
-            <Route exact path='/' component={Dashboard} />
-            <Route exact path='/login' component={LoginType} />
-            <Route exact path='/login/:type' component={Login} />
-            <Route path='/register' component={Register} />
-            <Route path='/UpdateForm' component={UpdateForm} />
+            <Switch>
+              <Route exact path='/' component={DefaultHome} />
+              <Route exact path='/login' component={LoginType} />
+              <Route exact path='/login/:type' component={Login} />
+              <Route path='/register' component={Register} />
+              <Route path='/UpdateForm' component={UpdateForm} />
+              <Route path='/Dashboard' component={Dashboard} />
+              <Route path='/Profile' component={Profile} />
+              <Route component={PageNotFound}/>
+            </Switch>
           </Router>
         </div>
         </PostProvider>

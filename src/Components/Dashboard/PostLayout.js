@@ -31,7 +31,8 @@ export default function Hello(props)
         title={props.loading?  <Skeleton variant="rect"/> : props.name}
         subheader={props.loading?  <Skeleton /> : props.date}
       />
-      { props.loading ? <Skeleton variant="rect" height={250}/> : <img src={'http://192.168.137.191:8080/'+props.photo} className="mx-auto d-block img-fluid" /> } 
+      <div className="p-2">{props.content}</div>
+      { props.loading ? <Skeleton variant="rect" height={250}/> : <img src={'/'+props.photo} className="mx-auto d-block img-fluid" /> } 
       <CardContent>
       <button onClick={handleClick}>Like</button>
         <Typography variant="body2" color="textSecondary" component="p">

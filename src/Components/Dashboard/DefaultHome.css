@@ -1,3 +1,4 @@
+ 
 *{
     margin: 0px;
     padding: 0px;
@@ -10,8 +11,9 @@
     
 }
 div.headingDiv{
-    font-size: 12px;
-    background-color: #27d9e7;
+    font-size: 8px;
+    background-color: #000000;
+    opacity: 85%;
 }
 h1.heading{
     font-family: 'Oswald', sans-serif;
@@ -21,7 +23,7 @@ h1.heading{
     padding: 20px;
     margin: 0 auto;
     /* margin-top: 200px; */
-    font-size: 3em;
+    font-size: 22px;
     color: white;
 }
 
@@ -29,12 +31,13 @@ h1.heading{
 .flip-card {
     background-color: transparent;
     width: 50%;
-    height: 250px;
+    height: 50%;
+    margin-top: 2% ;
     margin: 5% auto;
     border: 1px solid #f1f1f1;
-    opacity: 90%;
+    opacity: 95%;
     perspective: 1000px; /* Remove this if you don't want the 3D effect */
-    font-size: 12px;    
+    font-size: 22px;    
 
   }
   
@@ -46,7 +49,7 @@ h1.heading{
     text-align: center;
     transition: transform 0.8s;
     transform-style: preserve-3d;
-    font-size: 12px;
+    font-size: 22px;
   }
   
   /* Do an horizontal flip when you move the mouse over the flip box container */
@@ -56,6 +59,7 @@ h1.heading{
   
   /* Position the front and back side */
   .flip-card-front, .flip-card-back {
+    padding-top: 15px;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -64,14 +68,205 @@ h1.heading{
   
   /* Style the front side (fallback if image is missing) */
   .flip-card-front {
-    background-color: #27d9e7;
+    background-color: #080808;
     color: white;
+    font-size:22px ;
+    opacity: 95%;
   }
   
   /* Style the back side */
   .flip-card-back {
-    background-color: #27d9e7;
+    background-color: #080808;
+    opacity: 95%;
     color: white;
-    font-size: 1.3em;
+    font-size:4px;
     transform: rotateY(180deg);
   }
+  @media screen and (min-width: 992px){
+    .flip-card {
+      background-color: transparent;
+      width: 45%;
+      height: 45%;
+      margin-top: 2% ;
+      margin: 5% auto;
+      border: 1px solid #f1f1f1;
+      opacity: 95%;
+      perspective: 1000px; /* Remove this if you don't want the 3D effect */
+      font-size: 22px;    
+  
+    }
+    .flip-card-back {
+      background-color: #080808;
+      opacity: 95%;
+      color: white;
+      font-size: 22px;
+      transform: rotateY(180deg);
+    }
+    div.headingDiv{
+      font-size: 9px;
+      background-color: #000000;
+      opacity: 85%;
+  }
+  h1.heading{
+    font-family: 'Oswald', sans-serif;
+    color: black;
+    text-align: center;  
+    width:100%;
+    padding: 20px;
+    margin: auto;
+    font-size: 3em;
+    color: white;
+
+
+  }
+  .flip-card-front {
+    background-color: #080808;
+    color: white;
+    font-size:22px ;
+    opacity: 95%;
+  }
+}
+  @media screen and (min-width: 768px){
+    .flip-card-back {
+      background-color: #080808;
+      opacity: 95%;
+      color: white;
+      font-size: 20px;
+      transform: rotateY(180deg);
+    }
+    .flip-card {
+      background-color: transparent;
+      width: 45%;
+      height: 45%;
+      margin-top: 2% ;
+      margin: 5% auto;
+      border: 1px solid #f1f1f1;
+      opacity: 95%;
+      perspective: 1000px; /* Remove this if you don't want the 3D effect */
+      font-size: 3em;    
+  
+    }
+    div.headingDiv{
+      font-size: 8px;
+      background-color: #000000;
+      opacity: 85%;
+  }
+  h1.heading{
+    font-family: 'Oswald', sans-serif;
+    color: black;
+    text-align: center;  
+    width:100%;
+    padding: 20px;
+    margin: auto;
+    font-size: 3em;
+    color: white;
+
+
+  }
+    .flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+  }
+  .flip-card-front {
+    background-color: #080808;
+    color: white;
+    font-size:20px ;
+    opacity: 95%;
+  }
+
+  }
+  
+  @media screen and (min-width: 576px){
+    .flip-card-back {
+      background-color: #080808;
+      opacity: 95%;
+      color: white;
+      font-size: 18px;
+      transform: rotateY(180deg);
+    }
+    div.headingDiv{
+      font-size: 7px;
+      background-color: #000000;
+      opacity: 85%;
+  }
+  h1.heading{
+    font-family: 'Oswald', sans-serif;
+    color: black;
+    text-align: center;  
+    width:100%;
+    padding: 20px;
+    margin: auto;
+    font-size: 3em;
+    color: white;
+
+
+  }
+  .flip-card-front {
+    background-color: #080808;
+    color: white;
+    font-size:18px ;
+    opacity: 95%;
+  }
+  .flip-card {
+    background-color: transparent;
+    width: 50%;
+    height: 50%;
+    margin-top: 2% ;
+    margin: 5% auto;
+    border: 1px solid #f1f1f1;
+    opacity: 95%;
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+    font-size: 3em;    
+
+  }
+
+  }
+  @media screen and (max-width: 576px)  {
+    .flip-card-back {
+      background-color: #080808;
+      opacity: 95%;
+      color: white;
+      font-size: 16px;
+      transform: rotateY(180deg);
+    }
+    div.headingDiv{
+      font-size: 6px;
+      background-color: #000000;
+      opacity: 85%;
+  }
+  .flip-card-front {
+    background-color: #080808;
+    color: white;
+    font-size:16px ;
+    opacity: 95%;
+  }
+  h1.heading{
+    font-family: 'Oswald', sans-serif;
+    color: black;
+    text-align: center;  
+    width:100%;
+    padding: 16px;
+    margin: auto;
+    font-size: 3em;
+    color: white;
+
+
+  }
+  .flip-card {
+    background-color: transparent;
+    width: 58%;
+    height: 58%;
+    margin-top: 2% ;
+    margin: 5% auto;
+    border: 1px solid #f1f1f1;
+    opacity: 95%;
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+    font-size: 3em;    
+
+  
+  }
+  }
+
+  

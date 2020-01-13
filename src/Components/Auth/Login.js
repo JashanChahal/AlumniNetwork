@@ -40,7 +40,9 @@ export default function Login(props) {
                 console.log({...authState, ...res.data, LoggedIn: true})
                 setLoading(false)
                 changeAuthState({...authState, ...res.data, LoggedIn: true})
-                props.history.push("/");
+                localStorage.setItem('login',true)
+                props.history.push("/Dashboard");
+                console.log(res)
             })
             .catch(err => {
                 setLoading(false)

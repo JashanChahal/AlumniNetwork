@@ -1,6 +1,6 @@
 import React, { Component,useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import {CircularProgress,TextField  } from '@material-ui/core';
+import {CircularProgress,TextField,Dialog ,DialogActions,Button,DialogContent ,DialogContentText ,DialogTitle   } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import "./register.css";
 import axios from 'axios'
@@ -15,7 +15,7 @@ const emailRegex = RegExp(
 var socket = io('http://192.168.43.60:8080', { transport: ['websocket'] });
 
 socket.on('notification', (res) => {
-    
+
     console.log(res);
 })
 
@@ -35,6 +35,15 @@ export default function Register(props) {
 
     const [loading, setLoading] = useState(false)
     const [errorMessage,setErrorMessage]=useState(false)
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
     const [state,setState]=useState({
             Name: '',
             Password: '',
@@ -60,21 +69,22 @@ export default function Register(props) {
     const colleges=[{name: 'NIT Jalandhar'},{name:'NIT Kurushetra'},{name: 'NIT Jaipur'},{name: 'Thapar'},{name: 'LPU'}]
     const branches=[{name: 'CSE'},{name: 'ECE'},{name: 'Civil'},{name: 'IPE'},{name: 'ICE'}]
     function submitHandler(e){
-        console.log(state)
+        
         e.preventDefault()
         if (formValid(state)) {
             setLoading(true)
             var obj = JSON.parse(JSON.stringify(state));
-           
+           console.log(obj)
             delete obj.formErrors;
-            console.log(obj)
+           
             axios.post('/register',obj)
             .then(res => {
-                console.log(res)
                 setLoading(false)
-                 props.history.push("/login")    
+                setOpen(true)
+                //  props.history.push("/login")    
              })
             .catch(err => {
+                console.log(err)
                 setLoading(false)
                 setErrorMessage(true);
                 })       
@@ -254,13 +264,37 @@ export default function Register(props) {
                             <input type="text" name="College" id="College" value={College} onChange={changeHandler} /> */}
                         </div>
                         <div className="createAccount">
-                            <button type="submit">Create Account</button>
+                            <button type="submit" >Create Account</button>
                             <small>Already Have Account?  <Link to="/login">Sign In</Link></small>
                         </div>
                         {loading && <CircularProgress size={54} style={{ position:'absolute', top: '50%',left: '50%' }}/> }
        
                     </form>
                 </div>
+
+
+
+                <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{" Verification mail has been sent to you . Please verify your email account."}</DialogTitle>
+        <DialogContent>
+          {/* <DialogContentText id="alert-dialog-description">
+            Verification mail has been sent to you . Please verify your email account.
+          </DialogContentText> */}
+        </DialogContent>
+        <DialogActions>
+         
+          <Button component={Link} to="/login" color="primary" autoFocus>
+            Ok
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+
             </div>
         )
     }
