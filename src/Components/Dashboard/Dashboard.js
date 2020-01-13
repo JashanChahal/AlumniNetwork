@@ -28,8 +28,10 @@ export default function Dashboard() {
                 <TabPanel>
                     <Profile/>
                 </TabPanel>
-                <TabPanel>
-                    <h2>Group Chat</h2>
+                <TabPanel style={{height: '90vh'}}>
+                <iframe src = {"https://protected-cliffs-41219.herokuapp.com/chat.html?name=" + authState.Name +"&room=" + authState.College}  width = "100%" height = "100%">
+         Sorry your browser does not support inline frames.
+      </iframe>
                 </TabPanel>
             </Tabs>
 
