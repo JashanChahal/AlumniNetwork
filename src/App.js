@@ -13,7 +13,7 @@ import Profile from './Components/Dashboard/Profile';
 import UpdateForm from './Components/Dashboard/UpdateForm.js'
 import DefaultHome from './Components/Dashboard/DefaultHome';
 import PageNotFound from './Components/Dashboard/PageNotFound'
-
+import RegistrationReq from './Components/Dashboard/RegistrationReq'
 class App extends Component {
 
   render() {
@@ -31,6 +31,7 @@ class App extends Component {
               <Route path='/UpdateForm' component={UpdateForm} />
               <Route path='/Dashboard' component={Dashboard} />
               <Route path='/Profile' component={Profile} />
+              <Route path='/Verify/:id' component={RegistrationReq} />
               <Route component={PageNotFound}/>
             </Switch>
           </Router>

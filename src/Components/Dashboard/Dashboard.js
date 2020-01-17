@@ -6,7 +6,7 @@ import 'react-tabs/style/react-tabs.css'
 import Profile from './Profile'
 import { AuthContext } from '../../Context/AuthContext.js';
 import DefaultHome from './DefaultHome'
-
+import SidePanel from './SidePanel.js'
 
 export default function Dashboard() {
   
@@ -23,7 +23,14 @@ export default function Dashboard() {
                     <Tab>Group Chat</Tab>
                 </TabList>
                 <TabPanel>
+                    <div className="row">
+                    <div className="col-md-8">
                     <PostsShow />
+                    </div>
+                    <div className="col-md-4 border">
+                    <SidePanel/>
+                    </div>
+                    </div>
                 </TabPanel>
                 <TabPanel>
                     <Profile/>
