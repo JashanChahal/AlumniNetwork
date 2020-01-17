@@ -13,12 +13,12 @@ import io from 'socket.io-client';
 const emailRegex = RegExp(
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
-var socket = io('http://192.168.43.60:8080', { transport: ['websocket'] });
+// var socket = io('http://192.168.43.60:8080', { transport: ['websocket'] });
 
-socket.on('notification', (res) => {
+// socket.on('notification', (res) => {
 
-    console.log(res);
-})
+//     console.log(res);
+// })
 
 const formValid = state => {
     let valid = true
@@ -159,7 +159,7 @@ export default function Register(props) {
         setState({ ...state, formErrors:{...state.formErrors,formErrors}, [name]: e.target.value })
     }
         var { Name, Password, FatherName, MotherName, Email, Year, Branch, Cgpa, WorkExperience,Type,formErrors } = state
-        console.log(formErrors)
+        // console.log(formErrors)
         return (
             <div style={{pointerEvents: loading?'none':'auto'}} className="wrapper">
                 <div className="form-wrapper">

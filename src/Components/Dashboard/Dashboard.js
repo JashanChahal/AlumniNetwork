@@ -40,7 +40,14 @@ export default function Dashboard() {
                     <Tab>Search</Tab>
                 </TabList>
                 <TabPanel>
+                    <div className="row">
+                    <div className="col-md-8">
                     <PostsShow />
+                    </div>
+                    <div className="col-md-4 border">
+                    <SidePanel/>
+                    </div>
+                    </div>
                 </TabPanel>
                 <TabPanel>
                     <Profile/>
