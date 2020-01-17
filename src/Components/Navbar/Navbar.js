@@ -18,34 +18,6 @@ export default function Navbar(props) {
     
     const [authState, setauthState] = useContext(AuthContext)
 
-//     useEffect(()=>{
-//         const data=localStorage.getItem('auth-data')
-//         if(data)
-//             setauthState(JSON.parse(data))
-   
-        
-//         // const loading=localStorage.getItem('loading')
-//         // if(loading)
-//         //     setLoading(JSON.parse(loading))
-// },[])
-// useEffect(()=>{
-//     localStorage.setItem('auth-data', JSON.stringify(authState) )
-    
-// })
-
-        // useEffect(()=>{
-        // const data=localStorage.getItem('auth-data')
-        // if(data)
-        //     setauthState(JSON.parse(data))
-        // const user_auth=localStorage.getItem('user-auth')
-            
-        // },[])
-
-        // useEffect(()=>{
-        //     localStorage.setItem('auth-data', JSON.stringify(authState) )
-            
-        // })
-
 
     let Felement = <IconButton component={Link} to={authState.LoggedIn ? "/Dashboard": '/' } linkButton={true} >
         <HomeSharpIcon style={{ color: "white" }} />

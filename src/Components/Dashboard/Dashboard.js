@@ -7,6 +7,7 @@ import Profile from './Profile'
 import { AuthContext } from '../../Context/AuthContext.js';
 import DefaultHome from './DefaultHome'
 import Search from '../Search'
+import SidePanel from './SidePanel'
 
 
 function usePersistedState(key, defaultValue) {

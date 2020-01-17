@@ -42,7 +42,7 @@ export default function PostsShow(){
     function provider(){
         var arr=[]
         for(var i=0;i<3;i++)
-            arr.push(<PostLayout loading={loading} postId={i} likes={24}/>)
+            arr.push(<PostLayout loading={loading} postId={i} />)
         return arr;
     }
 
@@ -57,18 +57,16 @@ export default function PostsShow(){
     //   }, []);
 
     function download(){
-        console.log("we are in download section")
            axios.post('/posts/get_post_by_college',{
+               _id: authState._id,
               College: authState.College
           })   //'https://uinames.com/api/?ext&&amount=10');
           .then(result=>{console.log("result :")
-          console.log(result)
           setLoading(false)
           setData(result.data);
         })
         .catch(err=>console.log("we have error"))
 
-        console.log("we are out of this shit")
     }
 
     { loading && download() } 
@@ -87,10 +85,7 @@ export default function PostsShow(){
 
               { loading ? provider() : 
                 data.map((item,idx)=>{
-                console.log('its the time')
-                {/* return <PostLayout loading={loading}  photo={item.PostImage}/> */}
-                return <PostLayout loading={loading} name={item.Name} content={item.Content} date={item.Date} photo={item.postImage} likes={item.NoOfLikes} comments={item.NoOfComments} postId= {idx/*item._id*/} hasLiked={true}/>
-                    {/* return <div> GOT THE DATA</div> */}
+                return <PostLayout loading={loading} name={item[0].Name} content={item[0].Content} date={item[0].Date} photo={item[0].postImage} likes={item[0].NoOfLikes} comments={item[0].NoOfComments} postId= {idx/*item._id*/} hasLiked={item[1]}/>
                     })
             }
             
