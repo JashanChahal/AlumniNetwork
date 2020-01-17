@@ -20,17 +20,17 @@ export default function PostsShow(){
             const data=localStorage.getItem('user-data')
             if(data)
                 setData(JSON.parse(data))
-            const user_auth=localStorage.getItem('user-auth')
-            if(user_auth)
-                changeAuthState(JSON.parse(user_auth))
+            // const user_auth=localStorage.getItem('user-auth')
+            // if(user_auth)
+            //     changeAuthState(JSON.parse(user_auth))
             
             // const loading=localStorage.getItem('loading')
-            // if(loading)
+            // if(loading)  
             //     setLoading(JSON.parse(loading))
     },[])
     useEffect(()=>{
         localStorage.setItem('user-data', JSON.stringify(data) )
-        localStorage.setItem('user-auth', JSON.stringify(authState) )
+        // localStorage.setItem('user-auth', JSON.stringify(authState) )
         localStorage.setItem('loading', JSON.stringify(loading) )
         
     })
@@ -42,7 +42,7 @@ export default function PostsShow(){
     function provider(){
         var arr=[]
         for(var i=0;i<3;i++)
-            arr.push(<PostLayout loading={loading}/>)
+            arr.push(<PostLayout loading={loading} postId={i} likes={24}/>)
         return arr;
     }
 
@@ -86,10 +86,10 @@ export default function PostsShow(){
                             </div> 
 
               { loading ? provider() : 
-                data.map(item=>{
+                data.map((item,idx)=>{
                 console.log('its the time')
                 {/* return <PostLayout loading={loading}  photo={item.PostImage}/> */}
-                return <PostLayout loading={loading} name={item.Name} content={item.Content} date={item.Date} photo={item.postImage} likes={item.NoOfLikes} comments={item.NoOfComments} postId={item._id}/>
+                return <PostLayout loading={loading} name={item.Name} content={item.Content} date={item.Date} photo={item.postImage} likes={item.NoOfLikes} comments={item.NoOfComments} postId= {idx/*item._id*/} hasLiked={true}/>
                     {/* return <div> GOT THE DATA</div> */}
                     })
             }

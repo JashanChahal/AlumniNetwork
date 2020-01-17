@@ -13,6 +13,7 @@ import Profile from './Components/Dashboard/Profile';
 import UpdateForm from './Components/Dashboard/UpdateForm.js'
 import DefaultHome from './Components/Dashboard/DefaultHome';
 import PageNotFound from './Components/Dashboard/PageNotFound'
+// import Search from './Components/Search'
 
 class App extends Component {
 

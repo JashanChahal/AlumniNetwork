@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext,useEffect} from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import './Dashboard.css'
 import PostsShow from './PostsShow'
@@ -6,21 +6,38 @@ import 'react-tabs/style/react-tabs.css'
 import Profile from './Profile'
 import { AuthContext } from '../../Context/AuthContext.js';
 import DefaultHome from './DefaultHome'
+import Search from '../Search'
+
+
+function usePersistedState(key, defaultValue) {
+    const [state, setState] = React.useState(
+      () => JSON.parse(localStorage.getItem(key)) || defaultValue
+    );
+    useEffect(() => {
+        console.log(state)
+      localStorage.setItem(key, JSON.stringify(state));
+    }, [key, state]);
+    return [state, setState];
+  }
 
 
 export default function Dashboard() {
   
    const [authState,setAuthState]= useContext(AuthContext)
-  
+   const [tab,setTab] = usePersistedState('current-tab',0)
+   function handle(){
+       setAuthState({...authState,LoggedIn:!(authState.LoggedIn)})
+   }
    console.log("on Dashboard")
    console.log(authState)
    return (
         <div>
-            <Tabs>
+             <Tabs defaultIndex={tab} onSelect={(index)=>setTab(index)}>
                 <TabList >
                     <Tab >Events</Tab>
                     <Tab>Profile</Tab>
                     <Tab>Group Chat</Tab>
+                    <Tab>Search</Tab>
                 </TabList>
                 <TabPanel>
                     <PostsShow />
@@ -32,6 +49,9 @@ export default function Dashboard() {
                 <iframe src = {"https://protected-cliffs-41219.herokuapp.com/chat.html?name=" + authState.Name +"&room=" + authState.College}  width = "100%" height = "100%">
          Sorry your browser does not support inline frames.
       </iframe>
+                </TabPanel>
+                <TabPanel>
+                    <Search/>
                 </TabPanel>
             </Tabs>
 
