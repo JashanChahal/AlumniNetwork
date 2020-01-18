@@ -7,6 +7,7 @@ import axios from 'axios'
 import { isObject } from 'util';
 // import {io} from 'socket.io';
 import { Socket } from 'dgram';
+import {colleges,branches} from '../../Options'
 import io from 'socket.io-client';
 
 const emailRegex = RegExp(
@@ -66,8 +67,6 @@ export default function Register(props) {
                 Branch: '',
                 Cgpa: ''      } })
       
-    const colleges=[{name: 'NIT Jalandhar'},{name:'NIT Kurushetra'},{name: 'NIT Jaipur'},{name: 'Thapar'},{name: 'LPU'}]
-    const branches=[{name: 'CSE'},{name: 'ECE'},{name: 'Civil'},{name: 'IPE'},{name: 'ICE'}]
     function submitHandler(e){
         
         e.preventDefault()
@@ -79,11 +78,14 @@ export default function Register(props) {
            
             axios.post('/register',obj)
             .then(res => {
+                console.log('response')
+                console.log(res)
                 setLoading(false)
                 setOpen(true)
                 //  props.history.push("/login")    
              })
             .catch(err => {
+                console.log('error')
                 console.log(err)
                 setLoading(false)
                 setErrorMessage(true);

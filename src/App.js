@@ -13,6 +13,8 @@ import Profile from './Components/Dashboard/Profile';
 import UpdateForm from './Components/Dashboard/UpdateForm.js'
 import DefaultHome from './Components/Dashboard/DefaultHome';
 import PageNotFound from './Components/Dashboard/PageNotFound'
+// import Search from './Components/Search'
+
 import RegistrationReq from './Components/Dashboard/RegistrationReq'
 class App extends Component {
 

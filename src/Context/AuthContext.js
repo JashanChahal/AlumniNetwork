@@ -1,8 +1,20 @@
-import React,{createContext,useState} from 'react';
+import React,{createContext,useState,useEffect} from 'react';
 export const AuthContext = createContext();
 
+
+function usePersistedState(key, defaultValue) {
+    const [state, setState] = React.useState(
+      () => JSON.parse(localStorage.getItem(key)) || defaultValue
+    );
+    useEffect(() => {
+        console.log(state)
+      localStorage.setItem(key, JSON.stringify(state));
+    }, [key, state]);
+    return [state, setState];
+  }
+
 export const AuthProvider = (props)=>{
-    const [authValue,setauthValue] = useState({
+    const [authValue,setauthValue] = usePersistedState('auth-state',{
         _id:'',
         Name:'',
         Email:'',
