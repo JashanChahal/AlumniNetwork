@@ -15,7 +15,7 @@ const PostForm = (props) => {
         {
             Author: '',
             Text: '',
-            Image: ''
+            Image: null
         })
 
 
@@ -38,7 +38,11 @@ const PostForm = (props) => {
     const SubmitHandler = async (e) => {
         e.preventDefault()
         const obj = new FormData()
-        obj.append('postImage',PostState.Image,PostState.Image.name)
+        if(PostState.Image)
+        {obj.append('postImage',PostState.Image,PostState.Image.name)}
+        else{
+            obj.append('postImage',null)
+        }
         obj.append('Content',PostState.Text)
         obj.append('_id', authState._id)
         obj.append('Name', authState.Name)

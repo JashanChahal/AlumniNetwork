@@ -20,7 +20,9 @@ export default function Hello(props)
     useEffect(()=>
       changeLike(props.hasLiked)
     ,[props.hasLiked])
-
+    let photograph;
+    if(props.photo)
+    photograph = props.loading ? <Skeleton variant="rect" height={250}/> : <img src={'/'+props.photo} className="mx-auto d-block img-fluid" /> 
     return (
         <Paper elevation={1} variant="elevation" square className="mt-3">
           {console.log('we are rendring')}
@@ -35,7 +37,7 @@ export default function Hello(props)
         subheader={props.loading?  <Skeleton /> : props.date}
       />
       <div className="p-2">{props.content}</div>
-      { props.loading ? <Skeleton variant="rect" height={250}/> : <img src={'/'+props.photo} className="mx-auto d-block img-fluid" /> } 
+      {photograph} 
       <br/>
       
         {props.loading ? <Skeleton variant="rect"/>  :
