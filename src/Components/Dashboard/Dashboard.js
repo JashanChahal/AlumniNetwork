@@ -15,7 +15,6 @@ function usePersistedState(key, defaultValue) {
       () => JSON.parse(localStorage.getItem(key)) || defaultValue
     );
     useEffect(() => {
-        console.log(state)
       localStorage.setItem(key, JSON.stringify(state));
     }, [key, state]);
     return [state, setState];
@@ -29,8 +28,6 @@ export default function Dashboard() {
    function handle(){
        setAuthState({...authState,LoggedIn:!(authState.LoggedIn)})
    }
-   console.log("on Dashboard")
-   console.log(authState)
    return (
         <div>
              <Tabs defaultIndex={tab} onSelect={(index)=>setTab(index)}>

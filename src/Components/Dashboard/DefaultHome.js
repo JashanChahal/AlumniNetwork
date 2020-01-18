@@ -1,11 +1,16 @@
 import React from 'react'
 import './DefaultHome.css'
+
+
+
+
 export default function DefaultHome() {
     return (
         <div className='BODY' >
         <div className="headingDiv">
         <h1 className="heading"> <i class="fas fa-user-graduate"></i> | Stay Connected to your Alma Mater</h1>
     </div>
+
 
 
 

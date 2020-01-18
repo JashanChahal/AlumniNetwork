@@ -5,6 +5,9 @@ import {AppBar ,Toolbar,TextField,Button ,Input  } from '@material-ui/core';
 import axios from 'axios'
 import {AuthContext} from '../Context/AuthContext'
 import Avatar from '@material-ui/core/Avatar';
+
+
+
 function usePersistedState(key, defaultValue) {
     const [state, setState] = React.useState(
       () => JSON.parse(localStorage.getItem(key)) || defaultValue
@@ -23,6 +26,7 @@ export default function Search()
         Branch: '',
         Year: ''
     })
+    const [selectAll,changeSelectAll]=useState(false)
 
     const [users,changeUsers]=useState([])
     
@@ -31,9 +35,11 @@ export default function Search()
             e.preventDefault()
             console.log('hey we are submitting')           
             axios.post('/filter_users',search)
-            .then(res=> {console.log(res); changeUsers(res.data);})
+            .then(res=> { res.data=res.data.map(item=>({...item,isSelected:false}));  changeUsers(res.data);  })
             .catch(err=> console.log(err))
     }
+
+
 
     return (
         <div>
@@ -75,7 +81,14 @@ export default function Search()
         
             {/* <Toolbar color='primary'/> */}
         </form>
-        <div class="accordion" id="accordionExample">
+
+        <div className="m-3">
+        
+        <span className="heading2"><input type="checkbox" /> SELECT ALL </span>
+        <button>Send Mail</button>
+        </div>
+
+        <div  class="accordion" id="accordionExample">
                {  
                    users.map((user,idx)=> <Display name={user.Name} email={user.Email} id={idx} college={user.College}
                        year={user.Year} cgpa={user.Cgpa} workExperience={user.WorkExperience}
@@ -90,6 +103,7 @@ function Display(props){
     console.log(props.id)
     return(
         <div class="card">
+        <input type="checkbox" />
     <div class="card-header" id="headingOne">
       <h2 class="mb-0">
         <button class="btn btn-link" type="button" data-toggle="collapse" data-target={'#collapse'+props.id} aria-expanded="true" aria-controls={'collapse'+props.id}>
@@ -99,14 +113,16 @@ function Display(props){
       </h2>
     </div>
 
-    <div id={'collapse'+props.id} class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
-      <div class="card-body">
+    <div className='d-flex justify-content-between' id={'collapse'+props.id} class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body ">
       <p>Email: {props.email}</p>
         <p>Passing year: {props.year}</p>
         <p>College: {props.college}</p>
         <p>Cgpa: {props.cgpa}</p>
         <p>Year: {props.year}</p>
+        <a href={"mailto:"+props.email}><button  type="button" class="btn btn-success">Send Mail</button> </a> 
       </div>
+     
     </div>
   </div>
     )
