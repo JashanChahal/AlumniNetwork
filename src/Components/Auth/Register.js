@@ -56,7 +56,7 @@ export default function Register(props) {
             Cgpa: '',
             College: '',
             WorkExperience: '',
-            Type: 'Alumini',
+            Type: 'Alumni',
             formErrors: {
                 Name: '',
                 Password: '',

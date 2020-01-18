@@ -17,46 +17,14 @@ function SideDrawer(props) {
     if(props.show){
         drawerClasses = 'side-drawer open'
     }
-    let Felement = <IconButton component={Link} to="/" linkButton={true} >
-        <HomeSharpIcon  /> 
-    </IconButton>;
-    let Selement = (authState.LoggedIn && authState.Type !== "Visitor") && <IconButton component={Link} to="/Profile" linkButton={true} >
-        <AccountCircleSharpIcon  />
-    </IconButton>;
-    let SelenetNotLogged = (!authState.LoggedIn) && (<Link className="nav-link text-white" to='/Register'>Register</Link>);
-    let Telement = (authState.LoggedIn) ? (<IconButton component={Link} to='/' onClick={()=> {setauthState({...authState,LoggedIn: false}); localStorage.clear(); } }><ExitToAppSharpIcon style={{color :"white"}}/></IconButton>) : (<Link className="nav-link text-white ml-5" to='/login'>Login</Link>);
+    let Felement = <Link className="nav-link" to='/Dashboard'>Home</Link>
+    let Selement = (authState.LoggedIn && authState.Type !== "Visitor") && <Link className="nav-link" to='/Profile'>Profile</Link>
+    let SelenetNotLogged = (!authState.LoggedIn) && (<Link className="nav-link" to='/Register'>Register</Link>);
+    let Telement = (authState.LoggedIn) ? (<IconButton   component={Link} to='/' onClick={()=> {setauthState({...authState,LoggedIn: false}); localStorage.clear(); } }><ExitToAppSharpIcon style={{color :"blue",marginLeft:"0px"}}/></IconButton>) : (<Link className="nav-link" to='/login'>Login</Link>);
     switch (authState.Type) {
 
         case "Visitor":
-            SelenetNotLogged = <Link  to='/Register'>Register</Link>
-            break;
-        case 'College':
-            Selement = (<div className="dropdown">
-                <IconButton type="button" id="dropdownMenuButton" color="inherit" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <Badge badgeContent={19} color="secondary">
-                        <NotificationsNoneSharpIcon  />
-                    </Badge>
-                </IconButton>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </div>)
-            break;
-        case "Directorate":
-            Selement = <div className="dropdown">
-                <IconButton type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <Badge badgeContent={19} color="secondary">
-                        <NotificationsNoneSharpIcon  />
-                    </Badge>
-                </IconButton>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </div>
+            SelenetNotLogged = <Link className="nav-link"  to='/Register'>Register</Link>
             break;
         default:
             break;

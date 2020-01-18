@@ -8,8 +8,8 @@ import { AuthContext } from '../../Context/AuthContext.js';
 import DefaultHome from './DefaultHome'
 import Search from '../Search'
 import SidePanel from './SidePanel'
-
-
+import './style.css'
+import Login from '../Auth/Login'
 function usePersistedState(key, defaultValue) {
     const [state, setState] = React.useState(
       () => JSON.parse(localStorage.getItem(key)) || defaultValue
@@ -31,8 +31,12 @@ export default function Dashboard() {
    }
    console.log("on Dashboard")
    console.log(authState)
-
+   let search;
    let tabPanel ;
+   if(authState.Type!=="Alumni")
+   {
+       search = <Tab>Search</Tab>
+   }
    if(authState.Type=="College"){
        tabPanel = <TabPanel>
         <div className="row">
@@ -50,6 +54,16 @@ export default function Dashboard() {
        
     </TabPanel>
    }
+   if (!authState.LoggedIn) {
+    return (
+        <div>
+            <h1>Please Log in to view this page</h1>
+            <Login></Login>
+
+        </div>
+    )
+}
+ else{
    return (
         <div>
              <Tabs defaultIndex={tab} onSelect={(index)=>setTab(index)}>
@@ -57,7 +71,7 @@ export default function Dashboard() {
                     <Tab >Events</Tab>
                     <Tab>Profile</Tab>
                     <Tab>Group Chat</Tab>
-                    <Tab>Search</Tab>
+                    {search}
                 </TabList>
                  {tabPanel}
                 <TabPanel>
@@ -77,5 +91,5 @@ export default function Dashboard() {
 
     )
 }
-
+}
 

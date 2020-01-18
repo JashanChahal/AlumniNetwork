@@ -38,7 +38,7 @@ export default function Search()
     return (
         <div>
         <form onSubmit={handleSubmit}>
-        <AppBar color='inherit'  position='sticky'>
+        <AppBar color='inherit'  position='sticky' style={{zIndex:0}}>
         <Toolbar>
         <div className="container-fluid ">
                     <div className="row align-items-center">

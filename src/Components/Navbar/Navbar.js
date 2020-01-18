@@ -22,45 +22,16 @@ export default function Navbar(props) {
     let Felement = <IconButton component={Link} to={authState.LoggedIn ? "/Dashboard": '/' } linkButton={true} >
         <HomeSharpIcon style={{ color: "white" }} />
     </IconButton>;
-    let Selement = (authState.LoggedIn && authState.Type !== "Visitor") && <IconButton component={Link} to="/Profile" linkButton={true} >
-        <AccountCircleSharpIcon style={{ color: "white" }} />
-    </IconButton>;  
+    let Selement 
     let SelenetNotLogged = (!authState.LoggedIn) && (<Link className="nav-link text-white ml-5" to='/Register'>Register</Link>);
     let Telement = (authState.LoggedIn) ? (<IconButton component={Link} to='/' onClick={()=> {setauthState({...authState,LoggedIn: false}); localStorage.clear(); } }><ExitToAppSharpIcon style={{color :"white"}}/></IconButton>) : (<Link className="nav-link text-white ml-5" to='/login'>Login</Link>);
     switch (authState.Type) {
 
         case "Visitor":
             SelenetNotLogged = <Link className="nav-link text-white ml-5" to='/Register'>Register</Link>
+            break;
 
-            break;
-        case 'College':
-            Selement = (<div className="dropdown">
-                <IconButton type="button" id="dropdownMenuButton" color="inherit" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <Badge badgeContent={19} color="secondary">
-                        <NotificationsNoneSharpIcon style={{ color: "white" }} />
-                    </Badge>
-                </IconButton>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </div>)
-            break;
-        case "Directorate":
-            Selement = <div className="dropdown">
-                <IconButton type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <Badge badgeContent={19} color="secondary">
-                        <NotificationsNoneSharpIcon style={{ color: "white" }} />
-                    </Badge>
-                </IconButton>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </div>
-            break;
+
         default:
             break;
     }
