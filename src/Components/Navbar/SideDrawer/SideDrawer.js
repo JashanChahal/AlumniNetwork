@@ -24,7 +24,7 @@ function SideDrawer(props) {
         <AccountCircleSharpIcon  />
     </IconButton>;
     let SelenetNotLogged = (!authState.LoggedIn) && (<Link className="nav-link text-white" to='/Register'>Register</Link>);
-    let Telement = (authState.LoggedIn) ? (<IconButton onClick={()=>authState.logout()}><ExitToAppSharpIcon /></IconButton>) : (<Link  to='/login'>Login</Link>);
+    let Telement = (authState.LoggedIn) ? (<IconButton component={Link} to='/' onClick={()=> {setauthState({...authState,LoggedIn: false}); localStorage.clear(); } }><ExitToAppSharpIcon style={{color :"white"}}/></IconButton>) : (<Link className="nav-link text-white ml-5" to='/login'>Login</Link>);
     switch (authState.Type) {
 
         case "Visitor":
