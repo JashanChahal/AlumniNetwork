@@ -28,6 +28,29 @@ export default function Dashboard() {
    function handle(){
        setAuthState({...authState,LoggedIn:!(authState.LoggedIn)})
    }
+
+   console.log("on Dashboard")
+   console.log(authState)
+
+   let tabPanel ;
+   if(authState.Type=="College"){
+       tabPanel = <TabPanel>
+        <div className="row">
+        <div className="col-md-4 border">
+        <SidePanel/>
+        </div>
+        <div className="col-md-8">
+        <PostsShow />
+        </div>
+        </div>
+    </TabPanel>
+   }else{
+       tabPanel = <TabPanel>
+        <PostsShow />
+       
+    </TabPanel>
+   }
+
    return (
         <div>
              <Tabs defaultIndex={tab} onSelect={(index)=>setTab(index)}>
@@ -37,16 +60,7 @@ export default function Dashboard() {
                     <Tab>Group Chat</Tab>
                     <Tab>Search</Tab>
                 </TabList>
-                <TabPanel>
-                    <div className="row">
-                    <div className="col-md-8">
-                    <PostsShow />
-                    </div>
-                    <div className="col-md-4 border">
-                    <SidePanel/>
-                    </div>
-                    </div>
-                </TabPanel>
+                 {tabPanel}
                 <TabPanel>
                     <Profile/>
                 </TabPanel>
