@@ -57,7 +57,8 @@ export default function PostsShow(){
     //   }, []);
 
     function download(){
-           axios.post('/posts/get_post_by_college',{
+          let url= authState.Type=== 'directorate' ? '/posts/get_all_posts' :  '/posts/get_post_by_college';
+           axios.post(url,{
                _id: authState._id,
               College: authState.College
           })   //'https://uinames.com/api/?ext&&amount=10');

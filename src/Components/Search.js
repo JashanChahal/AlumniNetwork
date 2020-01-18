@@ -5,6 +5,9 @@ import {AppBar ,Toolbar,TextField,Button ,Input  } from '@material-ui/core';
 import axios from 'axios'
 import {AuthContext} from '../Context/AuthContext'
 import Avatar from '@material-ui/core/Avatar';
+
+
+
 function usePersistedState(key, defaultValue) {
     const [state, setState] = React.useState(
       () => JSON.parse(localStorage.getItem(key)) || defaultValue
@@ -25,16 +28,37 @@ export default function Search()
     })
 
     const [users,changeUsers]=useState([])
-    
+
     const [auth,setAuth] = useContext(AuthContext)
+    
     function handleSubmit(e){
-            e.preventDefault()
-            console.log('hey we are submitting')           
+            e.preventDefault()         
             axios.post('/filter_users',search)
-            .then(res=> {console.log(res); changeUsers(res.data);})
+            .then(res=> { res.data=res.data.map(item=>({...item,isSelected:false}));  changeUsers(res.data);  })
             .catch(err=> console.log(err))
     }
 
+    
+
+    function changeChecked(id){
+      console.log('here we are')
+      const newUsers=[...users]
+        newUsers[id].isSelected=!newUsers[id].isSelected;
+        changeUsers(newUsers);
+    }
+    
+    function selectAll(e)
+    {
+      console.log(e.target.checked)
+
+      console.log('selecting all')
+      // const newUsers=[...users]
+      const status=e.target.checked ? true : false;
+      const newUsers=[...users].map(user=>({...user,isSelected:status}))
+      changeUsers(newUsers)
+    }
+
+    console.log('seems we need to get updated');
     return (
         <div>
         <form onSubmit={handleSubmit}>
@@ -43,7 +67,7 @@ export default function Search()
         <div className="container-fluid ">
                     <div className="row align-items-center">
                     {
-                         (auth.Type == 'College')  && 
+                         (auth.Type == 'Directorate')  && 
                             <Autocomplete
                             className="col-md-3"
                             defaultValue={search.College} 
@@ -73,12 +97,22 @@ export default function Search()
         </Toolbar>
         </AppBar>
         
-            {/* <Toolbar color='primary'/> */}
         </form>
-        <div class="accordion" id="accordionExample">
-               {  
-                   users.map((user,idx)=> <Display name={user.Name} email={user.Email} id={idx} college={user.College}
-                       year={user.Year} cgpa={user.Cgpa} workExperience={user.WorkExperience}
+
+        <div className="m-3 d-flex justify-content-between">
+        
+        <span className="heading2"><input type="checkbox" onChange={selectAll}/> SELECT ALL </span>
+        <a href={"mailto:"+ users.map(user=> user.isSelected ? user.Email : '')} > <button type="button" class="btn btn-success" >SendMail</button></a>
+        </div>
+
+             { console.log(users) }           
+        <div  class="accordion" id="accordionExample">
+             
+               {   
+                
+                   users.map((user,idx)=> <Display id={idx} name={user.Name} email={user.Email}  college={user.College}
+                       year={user.Year} cgpa={user.Cgpa} workExperience={user.WorkExperience} checked={user.isSelected}
+                       changeChecked={changeChecked}
                    />)   
                 }
         </div>
@@ -87,9 +121,9 @@ export default function Search()
 }   
 
 function Display(props){
-    console.log(props.id)
     return(
         <div class="card">
+        <input type="checkbox"  checked={props.checked} onClick={()=>{props.changeChecked(props.id);}}/>
     <div class="card-header" id="headingOne">
       <h2 class="mb-0">
         <button class="btn btn-link" type="button" data-toggle="collapse" data-target={'#collapse'+props.id} aria-expanded="true" aria-controls={'collapse'+props.id}>
@@ -99,14 +133,16 @@ function Display(props){
       </h2>
     </div>
 
-    <div id={'collapse'+props.id} class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
-      <div class="card-body">
+    <div className='d-flex justify-content-between' id={'collapse'+props.id} class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body ">
       <p>Email: {props.email}</p>
         <p>Passing year: {props.year}</p>
         <p>College: {props.college}</p>
         <p>Cgpa: {props.cgpa}</p>
         <p>Year: {props.year}</p>
+        <a href={"mailto:"+props.email}><button  type="button" class="btn btn-success">Send Mail</button> </a> 
       </div>
+     
     </div>
   </div>
     )

@@ -162,6 +162,7 @@ export default function Register(props) {
         // console.log(formErrors)
         return (
             <div style={{pointerEvents: loading?'none':'auto'}} className="wrapper">
+            <a href="mailto:EMAILADDRESS">fshu</a>
                 <div className="form-wrapper">
                     <h1>Create Account</h1>
                     {/* <p className="lead"><FontAwesomeIcon icon={faUser} /> Create Your Account</p> */}

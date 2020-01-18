@@ -9,20 +9,21 @@ import ThumbUpAltTwoToneIcon from '@material-ui/icons/ThumbUpAltTwoTone';
 
 export default function Hello(props)
 {
-
+  
   const [authState,setAuthState]= useContext(AuthContext)
-  const [like,changeLike] =useState(props.hasLiked)
-  console.log('we recieved '+ props.hasLiked)
+  const [like,changeLike] =useState({ status: props.hasLiked})
+
+
     function handleClick(){
         changeLike(!like)
   }
-    useEffect(
-      ()=>{ console.log('i have set it to '+like)
-    }
-    ,[like])
+    useEffect(()=>
+      changeLike(props.hasLiked)
+    ,[props.hasLiked])
 
     return (
         <Paper elevation={1} variant="elevation" square className="mt-3">
+          {console.log('we are rendring')}
             <Card>
             <CardHeader
                 avatar={ props.loading ?<Skeleton variant="circle" width={40} height={40} />:
@@ -36,14 +37,13 @@ export default function Hello(props)
       <div className="p-2">{props.content}</div>
       { props.loading ? <Skeleton variant="rect" height={250}/> : <img src={'/'+props.photo} className="mx-auto d-block img-fluid" /> } 
       <br/>
-      {
-        props.loading ? <Skeleton variant="rect"/>  :
+      
+        {props.loading ? <Skeleton variant="rect"/>  :
       <CardContent>
-      { console.log('hey see'+like)}
-        <IconButton onClick={handleClick} > <ThumbUpAltTwoToneIcon fontSizeLarge color={like ? 'primary' : 'inherit'}/>  </IconButton>
+        <IconButton onClick={handleClick} > <ThumbUpAltTwoToneIcon fontSizeLarge color={like? 'primary' : 'action'}/>  </IconButton>
         <div>Likes: {like? props.likes+1 : props.likes}</div> 
       </CardContent>
-      }
+        }
       </Card>
         </Paper>
     )

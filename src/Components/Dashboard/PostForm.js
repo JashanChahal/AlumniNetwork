@@ -39,7 +39,6 @@ const PostForm = (props) => {
         e.preventDefault()
         const obj = new FormData()
         obj.append('postImage',PostState.Image,PostState.Image.name)
-        // obj.append('Author' ,PostState.Author)
         obj.append('Content',PostState.Text)
         obj.append('_id', authState._id)
         obj.append('Name', authState.Name)
@@ -52,21 +51,17 @@ const PostForm = (props) => {
         {
             setLoading(true)
         var result= await axios.post('/posts/create_post',obj)
-            console.log("POST RESULT : ")
-            console.log(result)
+
             setOn(!On);
             setLoading(false)
             window.location.reload();
-            // props.setData([...props.data,result])
-        // props.history.push("/");
+
         }catch(err){      
              
             alert("something went wrong")
             setLoading(false)
         }
         
-
-    // "http://192.168.43.60:8080/uploads/1578833806514periodic-table-of-tech-standalone_alt.jpg"
     }
     let wrapper = "postform-wrapper";
     let postwrapper = "postwrapper";
@@ -82,7 +77,6 @@ const PostForm = (props) => {
     }
     return (
         <React.Fragment>
-            {console.log(authState)}
             <div className={postwrapper}>
                 <div className={wrapper} >
                     <h1>Create Post</h1>

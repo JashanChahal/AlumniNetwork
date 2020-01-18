@@ -2,6 +2,10 @@ import React from 'react'
 import './DefaultHome.css'
 import group from './groups.webp'
 import './people.webp'
+
+
+
+
 export default function DefaultHome() {
     return (
       <div className="container">
