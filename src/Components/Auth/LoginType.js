@@ -14,13 +14,13 @@ export default function Login(){
     return (
         <div className="container" >
             <div className="row  justify-content-md-around flex-md-row flex-column mt-5">
-                <Link to="/login/alumni">
+                <Link to="/login/Alumni">
                     <Card  className="col" name="Alumni" imgUrl='https://cdn3.iconfinder.com/data/icons/education-flat-icon-1/130/148-512.png'/> 
                 </Link>
-                <Link to="/login/college">
+                <Link to="/login/College">
                 <Card className="col" name="College" imgUrl='https://st2.depositphotos.com/1007566/11938/v/950/depositphotos_119380382-stock-illustration-university-college-icon-education-academic.jpg' />
                 </Link>
-                <Link to="/login/directorate">
+                <Link to="/login/Directorate">
                 <Card className="col" name="Directorate" imgUrl='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAMZlgR2PyoyHcEWvYlDi8sQJ4KDQiyV5UVzYDaE4-goCsemNu&s' />
                 </Link>
 
