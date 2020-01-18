@@ -26,6 +26,16 @@ export default function Profile() {
    else if(redirectstate)
     return <Redirect to="/updateForm/" />
     else {
+        let roundbutton 
+        if(authState.Type!=="College")
+        {
+            roundbutton=<div className="row justify-content-end mr-3">
+            <IconButton  type="button" onClick={ClickHandler}>
+            <EditRoundedIcon/>
+            </IconButton>
+            
+            </div>
+        }
         return (
             <div class="container">
                 
@@ -58,16 +68,13 @@ export default function Profile() {
                                 Branch: {authState.Branch}
                             </Typography>
                             <Typography variant="body2" color="textSecondary" component="p">
+                                WorkExperience: {authState.WorkExperience}
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary" component="p">
                                 Year: {authState.Year}
                             </Typography>
                         </CardContent>
-                        <div className="row justify-content-end mr-3">
-                        <IconButton  type="button" onClick={ClickHandler}>
-                        <EditRoundedIcon/>
-                        </IconButton>
-                        
-                        </div>
-                        
+                        {roundbutton}
                         </Card>
                     </div>
                 </div>
