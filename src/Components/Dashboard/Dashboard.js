@@ -54,6 +54,11 @@ export default function Dashboard() {
        
     </TabPanel>
    }
+   let profile,profpanel ;
+   if(authState.Type==="Alumni"){
+   profile = <Tab>Profile</Tab>
+   profpanel = <TabPanel> <Profile/></TabPanel>
+}
    if (!authState.LoggedIn) {
     return (
         <div>
@@ -69,14 +74,12 @@ export default function Dashboard() {
              <Tabs defaultIndex={tab} onSelect={(index)=>setTab(index)}>
                 <TabList >
                     <Tab >Events</Tab>
-                    <Tab>Profile</Tab>
+                    {profile}
                     <Tab>Group Chat</Tab>
                     {search}
                 </TabList>
                  {tabPanel}
-                <TabPanel>
-                    <Profile/>
-                </TabPanel>
+                 {profpanel}
                 <TabPanel style={{height: '90vh'}}>
                 <iframe src = {"https://protected-cliffs-41219.herokuapp.com/chat.html?name=" + authState.Name +"&room=" + authState.College}  width = "100%" height = "100%">
          Sorry your browser does not support inline frames.

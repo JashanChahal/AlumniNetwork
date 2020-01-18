@@ -32,7 +32,10 @@ export default function Search()
     const [auth,setAuth] = useContext(AuthContext)
     
     function handleSubmit(e){
-            e.preventDefault()         
+            e.preventDefault()
+            if(auth.Type==="College")
+            setSearch({...search,College:auth.College}) 
+            console.log(search)        
             axios.post('/filter_users',search)
             .then(res=> { res.data=res.data.map(item=>({...item,isSelected:false}));  changeUsers(res.data);  })
             .catch(err=> console.log(err))
